@@ -21,6 +21,10 @@ body {
   overflow-x: hidden;
 }
 
+.font-serif {
+  font-family: var(--font-playfair), serif;
+}
+
 .gold-gradient {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
   -webkit-background-clip: text;
@@ -72,7 +76,21 @@ body {
   animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.animate-fade-left {
-  animation: fadeInLeft 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-10px) rotate(-6deg); }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 20s ease-out infinite alternate;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 4s ease-in-out infinite;
 }
 

@@ -4,168 +4,252 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-charcoal text-off-white selection:bg-gold selection:text-charcoal">
       {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full glass-panel py-6 px-8 flex justify-between items-center">
-        <div className="text-2xl font-bold tracking-tighter flex items-center gap-2">
-          <span className="gold-gradient">NEWLAND</span>
-          <span className="text-sm font-light tracking-[0.3em] opacity-80">PHOTOBOOK</span>
+      <nav className="fixed top-0 z-50 w-full glass-panel py-5 px-12 flex justify-between items-center border-b border-white/5">
+        <div className="flex items-center gap-4 group cursor-pointer">
+          <div className="w-10 h-10 gold-bg-gradient flex items-center justify-center rounded-sm transition-luxury group-hover:rotate-12">
+            <span className="text-charcoal font-black text-xl">N</span>
+          </div>
+          <div className="flex flex-col -space-y-1">
+            <span className="text-xl font-black tracking-tighter gold-gradient">NEWLAND</span>
+            <span className="text-[9px] font-bold tracking-[0.4em] opacity-50 uppercase">Photobook</span>
+          </div>
         </div>
-        <div className="hidden md:flex gap-10 text-sm font-medium tracking-widest uppercase">
-          <a href="#" className="hover:text-gold transition-colors">Home</a>
-          <a href="#printing" className="hover:text-gold transition-colors">Printing</a>
-          <a href="#album-design" className="hover:text-gold transition-colors">Album Design</a>
-          <a href="#portfolio" className="hover:text-gold transition-colors">Portfolio</a>
+        <div className="hidden lg:flex gap-12 text-[10px] font-bold tracking-[0.3em] uppercase">
+          <a href="#" className="hover:text-gold transition-luxury relative group">
+            Home
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+          </a>
+          <a href="#printing" className="hover:text-gold transition-luxury relative group">
+            Printing
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+          </a>
+          <a href="#album-design" className="hover:text-gold transition-luxury relative group">
+            Design
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+          </a>
+          <a href="#portfolio" className="hover:text-gold transition-luxury relative group">
+            Portfolio
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+          </a>
         </div>
-        <button className="gold-bg-gradient text-charcoal px-6 py-2 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-luxury">
+        <button className="gold-bg-gradient text-charcoal px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-luxury hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
           Start Project
         </button>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden pt-20">
+      {/* Hero Section - Polished Side Layout */}
+      <section className="relative h-screen flex items-center overflow-hidden bg-black">
+        {/* Background Image with Enhanced Gradients */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-printer.png"
-            alt="Professional printing process"
+            alt="Professional Printer"
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-50 scale-105 animate-ken-burns"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent" />
+          {/* Multi-layered Vignette for depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
         </div>
 
-        <div className="container mx-auto px-8 relative z-10">
-          <div className="max-w-3xl space-y-8 animate-fade-left">
-            <div className="flex items-center gap-4">
-              <div className="h-[1px] w-12 bg-gold" />
-              <span className="text-gold text-xs font-bold uppercase tracking-[0.4em]">Premium Digital Lab</span>
+        {/* Content */}
+        <div className="container mx-auto px-12 relative z-20 max-w-7xl animate-fade-left pt-20">
+          <div className="max-w-4xl space-y-10">
+            <div className="space-y-6">
+              <div className="flex items-center gap-6">
+                <span className="h-[1px] w-12 bg-gold/40" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-gold/80">Legacy of Excellence • Since 1955</span>
+              </div>
+
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-off-white leading-[1.2] tracking-tight">
+                The Art of <br />
+                <span className="italic gold-gradient">Preserving</span> <br className="lg:hidden" />
+                Memories.
+              </h1>
+
+              <p className="text-zinc-400 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed border-l border-gold/20 pl-8">
+                Professional digital lab and bespoke album design. <br className="hidden md:block" />
+                Elevating your photography into a timeless legacy with archival precision.
+              </p>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black leading-tight tracking-tighter">
-              Excellence in <br />
-              <span className="gold-gradient">Every Pixel.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed font-light">
-              The advanced destination for professional-grade printing, precision cutting, and bespoke album design. Elevating your vision with archival quality.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 pt-4">
-              <button className="gold-bg-gradient text-charcoal px-10 py-5 font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-luxury">
+
+            <div className="flex flex-col sm:flex-row items-center gap-10 pt-4">
+              <button className="group relative gold-bg-gradient text-charcoal px-10 py-5 text-[10px] font-black uppercase tracking-[0.3em] transition-luxury hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:scale-105">
                 Start Your Project
               </button>
-              <button className="border border-white/20 hover:border-gold/50 px-10 py-5 font-bold uppercase tracking-widest transition-luxury backdrop-blur-sm">
-                View Portfolio
-              </button>
+              <a href="#portfolio" className="group flex items-center gap-4 text-off-white text-[10px] font-black uppercase tracking-[0.4em] transition-luxury">
+                <span className="border-b border-white/20 group-hover:border-gold transition-luxury pb-1">View Portfolio</span>
+                <svg className="w-4 h-4 group-hover:translate-x-2 transition-luxury text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <div className="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent" />
+        {/* Bottom Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 animate-bounce">
+          <span className="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500">Scroll to Explore</span>
+          <div className="w-[1px] h-12 bg-gradient-to-t from-gold to-transparent" />
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="printing" className="py-32 px-8 bg-[#0a0a0a]">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <div className="space-y-4">
-              <h2 className="text-sm font-bold text-gold uppercase tracking-[0.4em]">Our Expertise</h2>
-              <h3 className="text-4xl md:text-5xl font-bold tracking-tighter">Crafting Perfection.</h3>
+      {/* Expertise Section - Boutique Minimalist Redesign */}
+      <section id="printing" className="py-40 px-12 bg-black">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-12">
+            <div className="space-y-6">
+              <h2 className="text-gold text-[10px] font-black uppercase tracking-[0.5em]">The Services</h2>
+              <h3 className="text-5xl md:text-7xl font-serif text-off-white leading-tight">
+                Our <span className="italic">Expertise</span>.
+              </h3>
             </div>
-            <p className="text-zinc-500 max-w-md text-right">
-              Utilizing state-of-the-art technology to deliver unmatched precision in every print and every cut.
+            <p className="text-zinc-500 max-w-sm text-lg font-light leading-relaxed">
+              Archival quality and precision in every service, from the lab to your walls.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Service 1: Photobooks */}
-            <div className="group glass-panel p-8 space-y-6 hover:translate-y-[-10px] transition-luxury premium-border">
-              <div className="w-14 h-14 gold-bg-gradient rounded-sm flex items-center justify-center">
-                <svg className="w-7 h-7 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Service 1 */}
+            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+              <Image
+                src="/images/service-photobook.png"
+                alt="Custom Photobooks"
+                fill
+                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
+                <h4 className="text-3xl font-serif text-off-white tracking-tight">Custom <br />Photobooks</h4>
+                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
+                  Bespoke, hand-bound albums crafted with archival materials to preserve your most precious memories.
+                </p>
+                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
               </div>
-              <h4 className="text-xl font-bold tracking-tight">Custom Photobooks</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Specialized in creating bespoke, high-end storybooks and wedding albums designed to last generations.
-              </p>
             </div>
 
-            {/* Service 2: Photo Printing */}
-            <div className="group glass-panel p-8 space-y-6 hover:translate-y-[-10px] transition-luxury premium-border">
-              <div className="w-14 h-14 gold-bg-gradient rounded-sm flex items-center justify-center">
-                <svg className="w-7 h-7 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+            {/* Service 2 */}
+            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+              <Image
+                src="/images/service-printing.png"
+                alt="Digital Printing"
+                fill
+                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
+                <h4 className="text-3xl font-serif text-off-white tracking-tight">Digital <br />Printing</h4>
+                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
+                  High-fidelity digital prints using museum-grade inkjet technology and professional archival paper.
+                </p>
+                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
               </div>
-              <h4 className="text-xl font-bold tracking-tight">Digital Printing</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                High-fidelity color grading and archival quality prints for professional photographers and enthusiasts.
-              </p>
             </div>
 
-            {/* Service 3: Framing */}
-            <div className="group glass-panel p-8 space-y-6 hover:translate-y-[-10px] transition-luxury premium-border">
-              <div className="w-14 h-14 gold-bg-gradient rounded-sm flex items-center justify-center">
-                <svg className="w-7 h-7 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 8h8v8H8z" />
-                </svg>
+            {/* Service 3 */}
+            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+              <Image
+                src="/images/service-framing.png"
+                alt="Professional Framing"
+                fill
+                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
+                <h4 className="text-3xl font-serif text-off-white tracking-tight">Professional <br />Framing</h4>
+                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
+                  Expertly joined museum frames and archival mounting solutions to protect and elevate your photography.
+                </p>
+                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
               </div>
-              <h4 className="text-xl font-bold tracking-tight">Professional Framing</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Expert framing services to protect and showcase your most precious moments with museum-grade quality.
-              </p>
             </div>
 
-            {/* Service 4: Canvas */}
-            <div className="group glass-panel p-8 space-y-6 hover:translate-y-[-10px] transition-luxury premium-border border-gold/30">
-              <div className="w-14 h-14 gold-bg-gradient rounded-sm flex items-center justify-center">
-                <svg className="w-7 h-7 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
+            {/* Service 4 */}
+            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+              <Image
+                src="/images/service-canvas.png"
+                alt="Canvas Printing"
+                fill
+                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
+                <h4 className="text-3xl font-serif text-off-white tracking-tight">Canvas <br />Printing</h4>
+                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
+                  Premium 100% cotton canvas material with vibrant pigment inks, providing a gallery-ready finish.
+                </p>
+                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
               </div>
-              <h4 className="text-xl font-bold tracking-tight">Canvas Printing</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Premium 100% canvas material prints that bring a gallery-like feel to any space.
-              </p>
-              <span className="inline-block px-3 py-1 border border-gold/40 text-[10px] font-bold uppercase tracking-widest text-gold">100% Canvas</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section id="portfolio" className="py-32 px-8 bg-charcoal overflow-hidden">
-        <div className="container mx-auto">
-          <div className="text-center mb-20 space-y-4">
-            <h2 className="text-sm font-bold text-gold uppercase tracking-[0.4em]">Portfolio</h2>
-            <h3 className="text-5xl md:text-7xl font-black tracking-tighter">Our Craft in Print.</h3>
+      {/* Gallery Section */}
+      <section id="portfolio" className="py-40 px-12 bg-[#050505]">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <span className="w-10 h-[1px] bg-gold" />
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gold">Curated Works</span>
+              </div>
+              <h2 className="text-5xl md:text-7xl font-serif text-off-white leading-tight">
+                The <span className="italic">Gallery</span>.
+              </h2>
+            </div>
+            <Link 
+              href="/gallery" 
+              className="group flex items-center gap-6 px-10 py-5 border border-white/10 hover:border-gold transition-luxury relative overflow-hidden"
+            >
+              <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em] text-off-white group-hover:text-charcoal transition-luxury">View Full Gallery</span>
+              <div className="absolute inset-0 gold-bg-gradient translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+              <svg className="w-5 h-5 relative z-10 group-hover:text-charcoal transition-luxury" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[300px]">
-            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden premium-border">
-              <Image src="/images/album-design.png" alt="Portfolio 1" fill className="object-cover transition-luxury group-hover:scale-110" />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
-                <span className="border-b-2 border-gold text-lg font-bold tracking-widest uppercase py-2">Wedding Albums</span>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
+              <Image
+                src="/images/hero-printer.png"
+                alt="Gallery work"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+              />
             </div>
-            <div className="relative group overflow-hidden premium-border">
-               <Image src="/images/print-cut.png" alt="Portfolio 2" fill className="object-cover transition-luxury group-hover:scale-110" />
-               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
-                <span className="text-sm font-bold tracking-widest uppercase">Custom Decals</span>
-              </div>
+            <div className="group relative aspect-square overflow-hidden bg-zinc-900 md:row-span-2 md:h-full border border-white/5">
+              <Image
+                src="/images/service-photobook.png"
+                alt="Gallery work"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+              />
             </div>
-            <div className="relative group overflow-hidden premium-border">
-               <Image src="/images/hero-printer.png" alt="Portfolio 3" fill className="object-cover transition-luxury group-hover:scale-110 grayscale" />
-               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
-                <span className="text-sm font-bold tracking-widest uppercase">Large Format</span>
-              </div>
+            <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
+              <Image
+                src="/images/hero-editorial.png"
+                alt="Gallery work"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+              />
             </div>
-            <div className="md:col-span-2 relative group overflow-hidden premium-border">
-              <div className="absolute inset-0 gold-bg-gradient opacity-10" />
-              <div className="absolute inset-0 flex items-center justify-center p-12 text-center">
-                <p className="text-xl italic font-serif text-zinc-300">"Every photograph tells a story. We ensure that story is told with the clarity and depth it deserves."</p>
-              </div>
+            <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
+              <Image
+                src="/images/service-framing.png"
+                alt="Gallery work"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+              />
+            </div>
+            <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
+              <Image
+                src="/images/service-canvas.png"
+                alt="Gallery work"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+              />
             </div>
           </div>
         </div>
@@ -224,9 +308,9 @@ export default function Home() {
                   <p className="text-lg text-off-white">14 New Town Ln, Circle</p>
                   <p className="text-lg text-off-white">Accra, Ghana</p>
                 </div>
-                <a 
-                  href="https://maps.app.goo.gl/q172Jny2sduqTg7V6" 
-                  target="_blank" 
+                <a
+                  href="https://maps.app.goo.gl/q172Jny2sduqTg7V6"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-gold text-sm font-bold uppercase tracking-widest border-b border-gold/30 hover:border-gold transition-luxury pb-1"
                 >
@@ -236,9 +320,18 @@ export default function Home() {
                   </svg>
                   Get Directions
                 </a>
+                <div className="space-y-4 pt-6 border-t border-white/5">
+                  <p className="text-sm font-medium tracking-widest uppercase text-zinc-500">Operating Hours</p>
+                  <div className="grid grid-cols-2 gap-2 text-sm text-zinc-400 font-light">
+                    <span>Mon - Thu</span> <span className="text-off-white">8:00 AM – 5:00 PM</span>
+                    <span>Fri</span> <span className="text-gold">Closed</span>
+                    <span>Sat</span> <span className="text-off-white">9:00 AM – 5:00 PM</span>
+                    <span>Sun</span> <span className="text-gold">Closed</span>
+                  </div>
+                </div>
               </div>
             </div>
-            
+
             <form className="space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Full Name</label>
@@ -272,7 +365,7 @@ export default function Home() {
               Modern Photos Studio B, 14 New Town Ln, Circle, Accra, Ghana. Professional digital lab and bespoke album design.
             </p>
           </div>
-          
+
           <div className="flex flex-col gap-4">
             <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Navigation</span>
             <div className="flex flex-col gap-2 text-xs font-bold uppercase tracking-widest">
@@ -286,8 +379,8 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Social</span>
             <div className="flex flex-col gap-2 text-xs font-bold uppercase tracking-widest">
-              <a href="#" className="hover:text-off-white transition-colors">Instagram</a>
-              <a href="#" className="hover:text-off-white transition-colors">LinkedIn</a>
+              <a href="https://www.facebook.com/modernphotolab/" target="_blank" rel="noopener noreferrer" className="hover:text-off-white transition-colors">Facebook</a>
+              <a href="https://www.linkedin.com/in/opoku-newland-37596b265" target="_blank" rel="noopener noreferrer" className="hover:text-off-white transition-colors">LinkedIn</a>
               <a href="#" className="hover:text-off-white transition-colors">WhatsApp</a>
             </div>
           </div>
