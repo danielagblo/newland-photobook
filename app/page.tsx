@@ -1,6 +1,30 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const expertiseRef = useRef<HTMLDivElement>(null);
+  const [isExpertiseVisible, setIsExpertiseVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsExpertiseVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (expertiseRef.current) {
+      observer.observe(expertiseRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-charcoal text-off-white selection:bg-gold selection:text-charcoal">
       {/* Navigation */}
@@ -16,87 +40,80 @@ export default function Home() {
         </div>
         <div className="hidden lg:flex gap-12 text-[10px] font-bold tracking-[0.3em] uppercase">
           <a href="#" className="hover:text-gold transition-luxury relative group">
-            Home
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
-          </a>
-          <a href="#printing" className="hover:text-gold transition-luxury relative group">
-            Printing
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
-          </a>
-          <a href="#album-design" className="hover:text-gold transition-luxury relative group">
-            Design
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+            Expertise
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
           </a>
           <a href="#portfolio" className="hover:text-gold transition-luxury relative group">
-            Portfolio
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all group-hover:w-full" />
+            Gallery
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
+          </a>
+          <a href="#about" className="hover:text-gold transition-luxury relative group">
+            History
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
+          </a>
+          <a href="#contact" className="hover:text-gold transition-luxury relative group">
+            Contact
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
           </a>
         </div>
-        <button className="gold-bg-gradient text-charcoal px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-luxury hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-          Start Project
-        </button>
+        <div className="flex items-center gap-6">
+          <button className="hidden md:block px-8 py-3 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal transition-luxury">
+            Start Project
+          </button>
+        </div>
       </nav>
 
-      {/* Hero Section - Polished Side Layout */}
-      <section className="relative h-screen flex items-center overflow-hidden bg-black">
-        {/* Background Image with Enhanced Gradients */}
+      {/* Hero Section */}
+      <section className="relative h-screen w-full flex items-center px-12 overflow-hidden bg-black">
+        {/* Background Image with Ken Burns Effect */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-printer.png"
-            alt="Professional Printer"
+            alt="Professional Photography Equipment"
             fill
-            className="object-cover opacity-50 scale-105 animate-ken-burns"
             priority
+            className="object-cover opacity-60 animate-ken-burns"
           />
-          {/* Multi-layered Vignette for depth */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
         </div>
 
-        {/* Content */}
-        <div className="container mx-auto px-12 relative z-20 max-w-7xl animate-fade-left pt-20">
+        <div className="container mx-auto max-w-7xl relative z-10 pt-24">
           <div className="max-w-4xl space-y-10">
-            <div className="space-y-6">
-              <div className="flex items-center gap-6">
-                <span className="h-[1px] w-12 bg-gold/40" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-gold/80">Legacy of Excellence • Since 1955</span>
-              </div>
-
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-off-white leading-[1.2] tracking-tight">
-                The Art of <br />
-                <span className="italic gold-gradient">Preserving</span> <br className="lg:hidden" />
-                Memories.
-              </h1>
-
-              <p className="text-zinc-400 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed border-l border-gold/20 pl-8">
-                Professional digital lab and bespoke album design. <br className="hidden md:block" />
-                Elevating your photography into a timeless legacy with archival precision.
-              </p>
+            <div className="flex items-center gap-4 animate-fade-in opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards]">
+              <span className="w-12 h-[1px] bg-gold" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gold">The Legacy of Excellence • Since 1955</span>
             </div>
+            
+            <h1 className="text-6xl md:text-8xl font-serif text-off-white leading-[0.9] tracking-tighter animate-fade-in opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards]">
+              Artistry in <br />
+              <span className="italic font-light">Every Frame.</span>
+            </h1>
 
-            <div className="flex flex-col sm:flex-row items-center gap-10 pt-4">
-              <button className="group relative gold-bg-gradient text-charcoal px-10 py-5 text-[10px] font-black uppercase tracking-[0.3em] transition-luxury hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:scale-105">
-                Start Your Project
+            <p className="text-zinc-400 max-w-xl text-lg font-light leading-relaxed animate-fade-in opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards]">
+              Harnessing over six decades of heritage to deliver the pinnacle of digital printing and archival framing solutions. We don't just print; we preserve your legacy.
+            </p>
+
+            <div className="flex flex-wrap gap-8 pt-4 animate-fade-in opacity-0 [animation-delay:800ms] [animation-fill-mode:forwards]">
+              <button className="px-12 py-5 bg-gold text-charcoal font-black text-xs uppercase tracking-[0.2em] hover:bg-white transition-luxury shadow-2xl shadow-gold/20">
+                Explore Services
               </button>
-              <a href="#portfolio" className="group flex items-center gap-4 text-off-white text-[10px] font-black uppercase tracking-[0.4em] transition-luxury">
-                <span className="border-b border-white/20 group-hover:border-gold transition-luxury pb-1">View Portfolio</span>
-                <svg className="w-4 h-4 group-hover:translate-x-2 transition-luxury text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+              <button className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] text-off-white hover:text-gold transition-luxury">
+                <span className="w-12 h-[1px] bg-white/20 group-hover:bg-gold transition-luxury" />
+                See Our Work
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 animate-bounce">
-          <span className="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500">Scroll to Explore</span>
-          <div className="w-[1px] h-12 bg-gradient-to-t from-gold to-transparent" />
+        {/* Centered Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
+          <span className="text-[9px] font-black uppercase tracking-[0.5em] text-gold/60">Scroll to Explore</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-gold/60 to-transparent animate-bounce-subtle" />
         </div>
       </section>
 
       {/* Expertise Section - Boutique Minimalist Redesign */}
-      <section id="printing" className="py-40 px-12 bg-black">
+      <section id="printing" className="py-40 px-12 bg-black" ref={expertiseRef}>
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-12">
             <div className="space-y-6">
@@ -116,15 +133,17 @@ export default function Home() {
                 src="/images/service-photobook.png"
                 alt="Custom Photobooks"
                 fill
-                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+                className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
                 <h4 className="text-3xl font-serif text-off-white tracking-tight">Custom <br />Photobooks</h4>
-                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
-                  Bespoke, hand-bound albums crafted with archival materials to preserve your most precious memories.
-                </p>
-                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
+                <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
+                  <p className="text-zinc-300 text-xs font-light leading-relaxed">
+                    Bespoke, hand-bound albums crafted with archival materials to preserve your most precious memories.
+                  </p>
+                  <div className="w-full h-[1px] bg-gold/50" />
+                </div>
               </div>
             </div>
 
@@ -134,15 +153,17 @@ export default function Home() {
                 src="/images/service-printing.png"
                 alt="Digital Printing"
                 fill
-                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+                className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
                 <h4 className="text-3xl font-serif text-off-white tracking-tight">Digital <br />Printing</h4>
-                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
-                  High-fidelity digital prints using museum-grade inkjet technology and professional archival paper.
-                </p>
-                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
+                <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
+                  <p className="text-zinc-300 text-xs font-light leading-relaxed">
+                    High-fidelity digital prints using museum-grade inkjet technology and professional archival paper.
+                  </p>
+                  <div className="w-full h-[1px] bg-gold/50" />
+                </div>
               </div>
             </div>
 
@@ -152,15 +173,17 @@ export default function Home() {
                 src="/images/service-framing.png"
                 alt="Professional Framing"
                 fill
-                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+                className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
                 <h4 className="text-3xl font-serif text-off-white tracking-tight">Professional <br />Framing</h4>
-                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
-                  Expertly joined museum frames and archival mounting solutions to protect and elevate your photography.
-                </p>
-                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
+                <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
+                  <p className="text-zinc-300 text-xs font-light leading-relaxed">
+                    Expertly joined museum frames and archival mounting solutions to protect and elevate your photography.
+                  </p>
+                  <div className="w-full h-[1px] bg-gold/50" />
+                </div>
               </div>
             </div>
 
@@ -170,15 +193,17 @@ export default function Home() {
                 src="/images/service-canvas.png"
                 alt="Canvas Printing"
                 fill
-                className="object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100"
+                className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-luxury group-hover:via-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
                 <h4 className="text-3xl font-serif text-off-white tracking-tight">Canvas <br />Printing</h4>
-                <p className="text-zinc-300 text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-luxury translate-y-4 group-hover:translate-y-0">
-                  Premium 100% cotton canvas material with vibrant pigment inks, providing a gallery-ready finish.
-                </p>
-                <div className="w-8 h-[1px] bg-gold/50 group-hover:w-full transition-all duration-700" />
+                <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
+                  <p className="text-zinc-300 text-xs font-light leading-relaxed">
+                    Premium 100% cotton canvas material with vibrant pigment inks, providing a gallery-ready finish.
+                  </p>
+                  <div className="w-full h-[1px] bg-gold/50" />
+                </div>
               </div>
             </div>
           </div>
@@ -198,14 +223,13 @@ export default function Home() {
                 The <span className="italic">Gallery</span>.
               </h2>
             </div>
-            <Link 
-              href="/gallery" 
-              className="group flex items-center gap-6 px-10 py-5 border border-white/10 hover:border-gold transition-luxury relative overflow-hidden"
+            <Link
+              href="/gallery"
+              className="group flex items-center gap-6 px-10 py-5 bg-gold text-charcoal hover:bg-off-white transition-luxury relative overflow-hidden"
             >
-              <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em] text-off-white group-hover:text-charcoal transition-luxury">View Full Gallery</span>
-              <div className="absolute inset-0 gold-bg-gradient translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-              <svg className="w-5 h-5 relative z-10 group-hover:text-charcoal transition-luxury" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em]">View Full Gallery</span>
+              <svg className="w-5 h-5 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
           </div>
@@ -216,7 +240,7 @@ export default function Home() {
                 src="/images/hero-printer.png"
                 alt="Gallery work"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+                className="object-cover transition-luxury duration-1000 group-hover:scale-110"
               />
             </div>
             <div className="group relative aspect-square overflow-hidden bg-zinc-900 md:row-span-2 md:h-full border border-white/5">
@@ -224,7 +248,7 @@ export default function Home() {
                 src="/images/service-photobook.png"
                 alt="Gallery work"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+                className="object-cover transition-luxury duration-1000 group-hover:scale-110"
               />
             </div>
             <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
@@ -232,7 +256,7 @@ export default function Home() {
                 src="/images/hero-editorial.png"
                 alt="Gallery work"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+                className="object-cover transition-luxury duration-1000 group-hover:scale-110"
               />
             </div>
             <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
@@ -240,7 +264,7 @@ export default function Home() {
                 src="/images/service-framing.png"
                 alt="Gallery work"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+                className="object-cover transition-luxury duration-1000 group-hover:scale-110"
               />
             </div>
             <div className="group relative aspect-square overflow-hidden bg-zinc-900 border border-white/5">
@@ -248,7 +272,7 @@ export default function Home() {
                 src="/images/service-canvas.png"
                 alt="Gallery work"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-luxury duration-1000 group-hover:scale-110"
+                className="object-cover transition-luxury duration-1000 group-hover:scale-110"
               />
             </div>
           </div>
@@ -260,7 +284,7 @@ export default function Home() {
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div className="relative aspect-square">
             <div className="absolute inset-0 border-[20px] border-charcoal translate-x-10 translate-y-10 z-0" />
-            <Image src="/images/hero-printer.png" alt="Advanced Equipment" fill className="object-cover relative z-10 grayscale hover:grayscale-0 transition-luxury" />
+            <Image src="/images/hero-printer.png" alt="Advanced Equipment" fill className="object-cover relative z-10 transition-luxury" />
             <div className="absolute -bottom-10 -right-10 glass-panel p-10 z-20 max-w-xs space-y-4">
               <span className="text-4xl font-bold gold-gradient">20+</span>
               <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">Years of Innovation in Print Technology</p>
