@@ -2,9 +2,12 @@
 
 import { processAndUpload } from "@/lib/s3";
 import { revalidatePath } from "next/cache";
+import dbConnect from "@/lib/db";
+import GalleryImage from "@/lib/models/GalleryImage";
 
 export async function uploadGalleryImage(formData: FormData) {
   try {
+    await dbConnect();
     const files = formData.getAll("images") as File[];
     const imageUrls: string[] = [];
 
@@ -12,6 +15,9 @@ export async function uploadGalleryImage(formData: FormData) {
       if (file.size > 0) {
         const url = await processAndUpload(file);
         imageUrls.push(url);
+        
+        // Save each image to DB
+        await GalleryImage.create({ url });
       }
     }
 

@@ -56,33 +56,33 @@ export function Footer() {
 
           {/* Location Column */}
           <div className="space-y-4">
-            <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Location</h4>
+            <h4 className="text-(--foreground) text-[10px] font-black uppercase tracking-[0.4em]">Location</h4>
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
                 <svg className="w-5 h-5 text-gold mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <p className="text-[var(--zinc-muted)] text-sm leading-relaxed">
+                <p className="text-(--zinc-muted) text-sm leading-relaxed">
                   Modern Photo Studio B,<br />
                   New Town Lane, Accra,<br />
                   Ghana
                 </p>
               </div>
-              <button className="w-full py-4 border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-luxury text-[var(--foreground)]">
+              <button className="w-full py-4 border border-(--border) text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-luxury text-(--foreground)">
                 Get Directions
               </button>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[var(--zinc-muted)] text-[10px] font-bold uppercase tracking-widest">
+        <div className="pt-12 border-t border-(--border) flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-(--zinc-muted) text-[10px] font-bold uppercase tracking-widest">
             © 2024 Newland Photobook. Designed by <a href="https://skytechghana.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold-light transition-luxury">SkytechGhana</a>
           </p>
-          <div className="flex gap-10 text-[9px] font-black uppercase tracking-widest text-[var(--zinc-muted)]">
+          <div className="flex gap-10 text-[9px] font-black uppercase tracking-widest text-(--zinc-muted)">
             <a href="#" className="hover:text-gold transition-luxury">Privacy Policy</a>
-            <a href="#" className="hover:text-[var(--foreground)] transition-luxury">Terms of Service</a>
+            <a href="#" className="hover:text-(--foreground) transition-luxury">Terms of Service</a>
           </div>
         </div>
       </div>
