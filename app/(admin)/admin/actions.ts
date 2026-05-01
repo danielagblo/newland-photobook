@@ -4,6 +4,7 @@ import { processAndUpload } from "@/lib/s3";
 import { revalidatePath } from "next/cache";
 import dbConnect from "@/lib/db";
 import GalleryImage from "@/lib/models/GalleryImage";
+import Inquiry from "@/lib/models/Inquiry";
 
 export async function uploadGalleryImage(formData: FormData) {
   try {
@@ -31,5 +32,16 @@ export async function uploadGalleryImage(formData: FormData) {
   } catch (error) {
     console.error("Upload action error:", error);
     return { success: false, error: "Failed to upload images" };
+  }
+}
+
+export async function getInquiries() {
+  try {
+    await dbConnect();
+    const inquiries = await Inquiry.find().sort({ createdAt: -1 });
+    return { success: true, inquiries: JSON.parse(JSON.stringify(inquiries)) };
+  } catch (error) {
+    console.error("Get inquiries error:", error);
+    return { success: false, error: "Failed to fetch inquiries" };
   }
 }

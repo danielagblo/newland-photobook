@@ -4,42 +4,27 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Protect /admin routes
-  if (path.startsWith('/admin')) {
-    const authHeader = request.headers.get('authorization');
+  // Protect /admin routes (except /admin/login)
+  if (path.startsWith('/admin') && path !== '/admin/login') {
+    const session = request.cookies.get('admin_session');
 
-    if (!authHeader) {
-      return new NextResponse('Authentication required', {
-        status: 401,
-        headers: {
-          'WWW-Authenticate': 'Basic realm="Admin Access"',
-        },
-      });
+    if (!session || session.value !== 'authenticated') {
+      const loginUrl = new URL('/admin/login', request.url);
+      return NextResponse.redirect(loginUrl);
     }
+  }
 
-    const authValue = authHeader.split(' ')[1];
-    const decodedAuth = atob(authValue).split(':');
-    const user = decodedAuth[0];
-    const pass = decodedAuth[1];
-
-    if (
-      user === process.env.ADMIN_USERNAME &&
-      pass === process.env.ADMIN_PASSWORD
-    ) {
-      return NextResponse.next();
+  // Redirect from login if already authenticated
+  if (path === '/admin/login') {
+    const session = request.cookies.get('admin_session');
+    if (session && session.value === 'authenticated') {
+      return NextResponse.redirect(new URL('/admin', request.url));
     }
-
-    return new NextResponse('Invalid credentials', {
-      status: 401,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Admin Access"',
-      },
-    });
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: ['/admin/:path*'],
 };

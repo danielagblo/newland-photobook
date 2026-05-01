@@ -23,7 +23,19 @@ export async function POST(request: Request) {
       const message = `New Inquiry from ${name} (${email}): Interested in ${projectType}. Check admin panel.`;
       
       try {
-        await fetch(`https://sms.arkesel.com/sms/api?action=send-sms&api_key=${ARKESEL_API_KEY}&to=${OWNER_PHONE}&from=${SENDER_ID}&sms=${encodeURIComponent(message)}`);
+        await fetch('https://sms.arkesel.com/sms/api?action=send-sms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': ARKESEL_API_KEY
+          },
+          body: JSON.stringify({
+            action: 'send-sms',
+            to: OWNER_PHONE,
+            from: SENDER_ID,
+            sms: message
+          })
+        });
       } catch (smsError) {
         console.error('Failed to send Arkesel SMS:', smsError);
       }
