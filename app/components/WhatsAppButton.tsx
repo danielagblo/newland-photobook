@@ -30,7 +30,7 @@ export function WhatsAppButton() {
       </div>
 
       {/* Label */}
-      <span className="bg-white dark:bg-zinc-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-border shadow-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-luxury">
+      <span className="bg-white dark:bg-zinc-900 text-charcoal dark:text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-[var(--border)] shadow-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-luxury">
         Chat with us
       </span>
     </a>
