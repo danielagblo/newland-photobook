@@ -3,14 +3,7 @@ import dbConnect from "@/lib/db";
 import GalleryImage from "@/lib/models/GalleryImage";
 
 export default async function GalleryPage() {
-  await dbConnect();
-  const dbImages = await GalleryImage.find({}).sort({ createdAt: -1 });
-
-  // Fallback to defaults if DB is empty
-  const images = dbImages.length > 0 ? dbImages.map((img: { url: string; title: string }) => ({
-    src: img.url,
-    title: img.title
-  })) : [
+  let images = [
     { src: "/images/hero-printer.png", title: "Chromatic Master" },
     { src: "/images/service-photobook.png", title: "Modern Album" },
     { src: "/images/service-framing.png", title: "Vibrant Frame" },
@@ -18,6 +11,20 @@ export default async function GalleryPage() {
     { src: "/images/hero-editorial.png", title: "Studio Series" },
     { src: "/images/print-cut.png", title: "Precision Output" },
   ];
+
+  try {
+    await dbConnect();
+    const dbImages = await GalleryImage.find({}).sort({ createdAt: -1 });
+
+    if (dbImages && dbImages.length > 0) {
+      images = dbImages.map((img: any) => ({
+        src: img.url,
+        title: img.title
+      }));
+    }
+  } catch (error) {
+    console.error("Failed to fetch gallery images from DB, using fallbacks:", error);
+  }
 
   return (
     <div className="min-h-screen bg-(--background) text-(--foreground) pb-32">
