@@ -8,7 +8,7 @@ export function Navbar() {
       <Link href="/" className="flex items-center gap-4 group cursor-pointer">
         <div className="flex flex-col -space-y-1">
           <span className="text-xl font-display tracking-[0.1em] text-(--foreground)">NEWLAND</span>
-          <span className="text-[9px] font-bold tracking-[0.4em] opacity-40 uppercase text-(--accent-primary)">Digital Lab</span>
+          <span className="text-[9px] font-bold tracking-[0.4em] opacity-40 uppercase text-(--accent-primary)">PhotoBook</span>
         </div>
       </Link>
 
@@ -25,8 +25,8 @@ export function Navbar() {
       </div>
 
       <div className="flex items-center gap-6">
-        <Link 
-          href="/#contact" 
+        <Link
+          href="/#contact"
           className="px-8 py-3.5 modern-gradient text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-full hover:scale-105 active:scale-95 transition-all duration-300 premium-card-shadow"
         >
           START PROJECT

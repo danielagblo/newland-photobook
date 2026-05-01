@@ -26,9 +26,8 @@ function ContactSlideshow() {
       {images.map((img, i) => (
         <div
           key={i}
-          className={`absolute inset-0 transition-opacity duration-[1500ms] ${
-            i === current ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-[1500ms] ${i === current ? "opacity-100" : "opacity-0"
+            }`}
         >
           <Image
             src={img}
@@ -44,10 +43,50 @@ function ContactSlideshow() {
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    projectType: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const handleInquirySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.projectType) {
+      alert("Please fill in all fields and select a project type.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", projectType: "" });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-(--background) text-(--foreground) selection:bg-(--accent-primary) selection:text-white">
@@ -57,7 +96,7 @@ export default function Home() {
         {/* Animated Background Blobs */}
         <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[90%] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse-slow" />
         <div className="absolute bottom-[-15%] left-[-10%] w-[50%] h-[70%] bg-violet-500/10 rounded-full blur-[120px] animate-pulse-slow" />
-        
+
         <div className="container mx-auto px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-6 space-y-4 lg:space-y-6">
             <div className={`space-y-3 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
@@ -114,7 +153,8 @@ export default function Home() {
       </section>
 
       {/* Services Section - Modern Contemporary Grid */}
-      <section id="services" className="py-32 px-12 bg-slate-50/50">
+      <section className="relative py-32 px-12 bg-slate-50/50">
+        <div id="services" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
           <div className="text-center space-y-6 mb-24">
             <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Laboratory Services</span>
@@ -150,7 +190,8 @@ export default function Home() {
       </section>
 
       {/* Legacy Section - Contemporary Storytelling - About */}
-      <section id="legacy" className="py-32 px-12">
+      <section className="relative py-32 px-12">
+        <div id="legacy" className="absolute top-24" />
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
           <div className="lg:col-span-6 relative order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-6">
@@ -176,7 +217,7 @@ export default function Home() {
               <span className="text-4xl font-display tracking-widest">1955</span>
             </div>
           </div>
-          
+
           <div className="lg:col-span-6 space-y-10 order-1 lg:order-2">
             <div className="space-y-6">
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.6em]">The Evolution</span>
@@ -210,7 +251,7 @@ export default function Home() {
               <div className="w-8 h-[2px] bg-slate-200 group-hover:w-16 group-hover:bg-indigo-500 transition-all duration-500" />
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-[900px]">
             {/* Main Feature */}
             <div className="md:col-span-7 relative group overflow-hidden rounded-[2.5rem] premium-card-shadow">
@@ -220,7 +261,7 @@ export default function Home() {
                 <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Chromatic Mastery</span>
               </div>
             </div>
-            
+
             <div className="md:col-span-5 grid grid-rows-2 gap-8">
               <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow">
                 <Image src="/images/service-photobook.png" alt="Work" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
@@ -243,7 +284,8 @@ export default function Home() {
       </section>
 
       {/* Contact Section - Modern Interaction */}
-      <section id="contact" className="py-40 px-12">
+      <section className="relative py-40 px-12">
+        <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
           <div className="bg-white rounded-[3rem] premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
             <div className="lg:w-1/2 relative min-h-[500px]">
@@ -260,28 +302,66 @@ export default function Home() {
 
             <div className="lg:w-1/2 p-12 md:p-24 space-y-12">
               <h3 className="text-3xl font-display text-slate-800">Inquiry.</h3>
-              <form className="space-y-10">
+              <form onSubmit={handleInquirySubmit} className="space-y-10">
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Your Identity</label>
-                  <input type="text" className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" placeholder="Full Name" />
+                  <input 
+                    type="text" 
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" 
+                    placeholder="Full Name" 
+                  />
                 </div>
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Electronic Mail</label>
-                  <input type="email" className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" placeholder="email@address.com" />
+                  <input 
+                    type="email" 
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" 
+                    placeholder="email@address.com" 
+                  />
                 </div>
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Project Type</label>
                   <div className="grid grid-cols-2 gap-4">
                     {['Photobook', 'Printing', 'Framing', 'Other'].map(type => (
-                      <button key={type} type="button" className="py-4 px-6 bg-slate-50 rounded-xl text-sm font-semibold text-slate-600 hover:bg-(--accent-primary) hover:text-white transition-all">
+                      <button 
+                        key={type} 
+                        type="button" 
+                        onClick={() => setFormData({ ...formData, projectType: type })}
+                        className={`py-4 px-6 rounded-xl text-sm font-semibold transition-all ${
+                          formData.projectType === type 
+                          ? "bg-(--accent-primary) text-white shadow-lg scale-105" 
+                          : "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                        }`}
+                      >
                         {type}
                       </button>
                     ))}
                   </div>
                 </div>
-                <button className="w-full py-6 modern-gradient text-white font-bold text-[11px] uppercase tracking-[0.5em] rounded-2xl premium-card-shadow hover:scale-[1.02] active:scale-[0.98] transition-all">
-                  SEND REQUEST
-                </button>
+                
+                <div className="space-y-4">
+                  <button 
+                    disabled={isSubmitting}
+                    className={`w-full py-6 modern-gradient text-white font-bold text-[11px] uppercase tracking-[0.5em] rounded-2xl premium-card-shadow transition-all ${
+                      isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02] active:scale-[0.98]"
+                    }`}
+                  >
+                    {isSubmitting ? "SENDING..." : "SEND REQUEST"}
+                  </button>
+
+                  {submitStatus === "success" && (
+                    <p className="text-green-500 text-center text-xs font-bold uppercase tracking-widest animate-pulse">Request sent successfully!</p>
+                  )}
+                  {submitStatus === "error" && (
+                    <p className="text-red-500 text-center text-xs font-bold uppercase tracking-widest">Failed to send. Please try again.</p>
+                  )}
+                </div>
               </form>
             </div>
           </div>
