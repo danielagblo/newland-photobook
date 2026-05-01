@@ -86,9 +86,10 @@ export default function Home() {
             alt="Professional Photography Equipment"
             fill
             priority
-            className="object-cover opacity-80 animate-ken-burns brightness-[0.7]"
+            className="object-cover opacity-80 animate-ken-burns brightness-[0.8]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/70 via-[var(--background)]/20 to-transparent" />
+          {/* Refined theme-aware overlay for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/75 via-[var(--background)]/20 to-transparent backdrop-blur-[2px]" />
         </div>
 
         <div className="container mx-auto max-w-7xl relative z-10 pt-24">
@@ -351,7 +352,7 @@ export default function Home() {
           <div className="lg:w-2/3 p-12 md:p-16 flex flex-col justify-center space-y-10 bg-[var(--card-bg)]">
             <form className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
               <div className="space-y-2 border-b border-[var(--border)] focus-within:border-gold transition-luxury pb-2">
-                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Full Name</label>
+                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--zinc-muted)]">Full Name</label>
                 <input 
                   type="text" 
                   className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 
@@ -359,15 +360,15 @@ export default function Home() {
                 />
               </div>
               <div className="space-y-2 border-b border-[var(--border)] focus-within:border-gold transition-luxury pb-2">
-                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Email</label>
+                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--zinc-muted)]">Email</label>
                 <input 
                   type="email" 
                   className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 
                   placeholder="email@example.com"
                 />
               </div>
-              <div className="space-y-2 border-b border-white/10 focus-within:border-gold transition-luxury pb-2 md:col-span-2">
-                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Message</label>
+              <div className="space-y-2 border-b border-[var(--border)] focus-within:border-gold transition-luxury pb-2 md:col-span-2">
+                <label className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--zinc-muted)]">Message</label>
                 <input 
                   type="text" 
                   className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 

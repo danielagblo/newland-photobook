@@ -7,6 +7,10 @@
   --color-off-white: #FAFAFA;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #FAFAFA;
   --foreground: #121212;
