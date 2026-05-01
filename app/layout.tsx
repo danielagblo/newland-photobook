@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Outfit, Playfair_Display, Syncopate } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -17,13 +12,17 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "NEWLAND PHOTOBOOK | Professional Digital Lab & Album Design",
-  description: "Excellence in every pixel. Professional-grade printing, precision cutting, and bespoke album design for photographers and creatives.",
-  keywords: ["photo printing", "album design", "print and cut", "digital lab", "professional photography"],
-};
+const syncopate = Syncopate({
+  variable: "--font-syncopate",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
 
-import { ThemeProvider } from "./components/ThemeProvider";
+export const metadata: Metadata = {
+  title: "NEWLAND STUDIOS | Archival Laboratory & Preservation",
+  description: "Six decades of visual excellence. Museum-grade printing, bespoke framing, and archival preservation in the heart of Accra.",
+  keywords: ["archival printing", "luxury photobooks", "museum framing", "digital lab accra", "photography preservation"],
+};
 
 export default function RootLayout({
   children,
@@ -33,12 +32,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${outfit.variable} ${playfair.variable} ${syncopate.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
       </body>
     </html>
   );

@@ -11,41 +11,52 @@ export default async function GalleryPage() {
     src: img.url,
     title: img.title
   })) : [
-    { src: "/images/hero-printer.png", title: "Master Print" },
-    { src: "/images/service-photobook.png", title: "Wedding Album" },
-    { src: "/images/service-framing.png", title: "Exhibition Frame" },
-    { src: "/images/service-canvas.png", title: "Abstract Canvas" },
-    { src: "/images/hero-editorial.png", title: "Bespoke Book" },
-    { src: "/images/print-cut.png", title: "Precision Cut" },
+    { src: "/images/hero-printer.png", title: "Chromatic Master" },
+    { src: "/images/service-photobook.png", title: "Modern Album" },
+    { src: "/images/service-framing.png", title: "Vibrant Frame" },
+    { src: "/images/service-canvas.png", title: "Neon Canvas" },
+    { src: "/images/hero-editorial.png", title: "Studio Series" },
+    { src: "/images/print-cut.png", title: "Precision Output" },
   ];
 
   return (
-    <div className="min-h-screen transition-colors duration-500 bg-(--background) text-(--foreground) selection:bg-gold selection:text-charcoal">
+    <div className="min-h-screen bg-(--background) text-(--foreground) pb-32">
 
-      <main className="pt-40 pb-24 px-12">
-        <div className="container mx-auto max-w-7xl space-y-16">
-          <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-serif leading-tight">
-              The <span className="italic">Gallery</span>.
-            </h1>
-            <p className="text-(--zinc-muted) max-w-xl text-lg font-light leading-relaxed">
-              A curated collection of our finest work, showcasing the intersection of art and archival precision.
+      <main className="pt-48 px-12">
+        <div className="container mx-auto max-w-7xl space-y-24">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
+            <div className="space-y-6">
+              <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Gallery</span>
+              <h1 className="text-7xl md:text-9xl font-display tracking-tighter">
+                Visual <br /><span className="vibrant-gradient-text italic">Chronicles.</span>
+              </h1>
+            </div>
+            <p className="text-slate-500 max-w-sm text-xl font-light leading-relaxed mb-4">
+              A dynamic showcase of our laboratory's commitment to high-fidelity color and contemporary archival standards.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {images.map((img: { src: string; title: string }, i: number) => (
-              <div key={i} className="group relative aspect-4/5 overflow-hidden bg-(--card-bg) border border-(--border)">
-                <Image
-                  src={img.src}
-                  alt={img.title}
-                  fill
-                  className="object-cover transition-luxury duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-(--background)/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-luxury" />
-                <div className="absolute inset-0 p-8 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-luxury">
-                  <p className="text-gold text-[10px] font-black uppercase tracking-widest mb-2">0{i + 1}</p>
-                  <h3 className="text-xl font-serif">{img.title}</h3>
+              <div key={i} className="group cursor-pointer space-y-8 bg-white p-4 rounded-3xl premium-card-shadow transition-all duration-500 hover:-translate-y-2">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                  <Image
+                    src={img.src}
+                    alt={img.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                  />
+                </div>
+                <div className="flex justify-between items-center px-4 pb-4">
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-bold tracking-[0.4em] text-slate-300">#0{i + 1}</span>
+                    <h3 className="text-2xl font-display text-slate-800 group-hover:text-(--accent-primary) transition-colors duration-300">{img.title}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-(--accent-primary) group-hover:text-white transition-all">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             ))}

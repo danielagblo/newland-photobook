@@ -2,87 +2,65 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--background)] pt-8 pb-4 px-12 border-t border-[var(--border)] relative overflow-hidden transition-colors duration-500">
-      {/* Subtle Background Glow */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[150px] translate-x-1/4 translate-y-1/4" />
-      
-      <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand Column */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 gold-bg-gradient flex items-center justify-center rounded-sm">
-                <span className="text-charcoal font-black text-2xl">N</span>
-              </div>
-              <div className="flex flex-col -space-y-1">
-                <span className="text-2xl font-black tracking-tighter text-[var(--foreground)]">NEWLAND</span>
-                <span className="text-[10px] font-bold tracking-[0.4em] text-gold uppercase">Photobook</span>
-              </div>
+    <footer className="bg-white pt-20 pb-12 px-12 border-t border-slate-100">
+      <div className="container mx-auto max-w-7xl">
+        <div className="bg-slate-50 rounded-[2.5rem] p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-16 mb-12">
+          {/* Brand & Mission */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-4">
+              <span className="text-2xl font-display tracking-[0.1em] text-(--foreground)">NEWLAND</span>
+              <p className="text-slate-500 text-lg font-light leading-relaxed max-w-sm">
+                Engineering visual legacies since 1955. High-fidelity output for the contemporary creator.
+              </p>
             </div>
-            <p className="text-[var(--zinc-muted)] text-sm leading-relaxed font-light">
-              Preserving Ghanaian heritage through archival precision and digital innovation since 1955.
-            </p>
             <div className="flex gap-6">
-              <a href="https://www.facebook.com/modernphotolab/" target="_blank" className="text-[var(--zinc-muted)] hover:text-gold transition-luxury">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-(--accent-primary) hover:border-(--accent-primary) transition-all premium-card-shadow">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-(--accent-primary) hover:border-(--accent-primary) transition-all premium-card-shadow">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-(--accent-primary) hover:border-(--accent-primary) transition-all premium-card-shadow">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
-              <a href="https://www.linkedin.com/in/opoku-newland-37596b265" target="_blank" className="text-[var(--zinc-muted)] hover:text-gold transition-luxury">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.58c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.96v5.7h-3.56V9h3.41v1.56h.05c.48-.9 1.64-1.86 3.38-1.86 3.63 0 4.3 2.39 4.3 5.5v6.25z"/></svg>
-              </a>
             </div>
           </div>
 
-          {/* Quick Links Column */}
-          <div className="space-y-4">
-            <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Navigation</h4>
-            <ul className="space-y-4">
-              <li><Link href="/#printing" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Expertise</Link></li>
-              <li><Link href="/gallery" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Full Gallery</Link></li>
-              <li><Link href="/#innovation" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Our History</Link></li>
-              <li><Link href="/#contact" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Contact Lab</Link></li>
+          {/* Navigation */}
+          <div className="lg:col-span-3 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-slate-300">LABORATORY</h4>
+            <ul className="space-y-4 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-600">
+              <li><Link href="/#services" className="hover:text-(--accent-primary) transition-colors">Services</Link></li>
+              <li><Link href="/gallery" className="hover:text-(--accent-primary) transition-colors">Gallery</Link></li>
+              <li><Link href="/#legacy" className="hover:text-(--accent-primary) transition-colors">About</Link></li>
             </ul>
           </div>
 
-          {/* Hours Column */}
-          <div className="space-y-4">
-            <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Operating Hours</h4>
-            <ul className="space-y-3 text-[var(--zinc-muted)] text-sm font-light">
-              <li className="flex justify-between"><span>Mon - Thu</span> <span className="text-[var(--foreground)]">8:00 - 17:00</span></li>
-              <li className="flex justify-between"><span>Friday</span> <span className="text-gold font-bold">Closed</span></li>
-              <li className="flex justify-between"><span>Saturday</span> <span className="text-[var(--foreground)]">9:00 - 17:00</span></li>
-              <li className="flex justify-between"><span>Sunday</span> <span className="opacity-50">Closed</span></li>
-            </ul>
-          </div>
-
-          {/* Location Column */}
-          <div className="space-y-4">
-            <h4 className="text-(--foreground) text-[10px] font-black uppercase tracking-[0.4em]">Location</h4>
+          {/* Contact & Location */}
+          <div className="lg:col-span-4 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-slate-300">VISIT</h4>
             <div className="space-y-6">
-              <div className="flex gap-4 items-start">
-                <svg className="w-5 h-5 text-gold mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p className="text-(--zinc-muted) text-sm leading-relaxed">
-                  Modern Photo Studio B,<br />
-                  New Town Lane, Accra,<br />
-                  Ghana
-                </p>
+              <p className="text-xl font-display text-slate-800 leading-tight">
+                Modern Photo Studio B,<br />
+                New Town Lane, Accra.
+              </p>
+              <div className="pt-2">
+                <a href="#" className="px-8 py-3 border-2 border-slate-200 rounded-full text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-(--accent-primary) hover:border-(--accent-primary) hover:text-white transition-all duration-300">
+                  GET DIRECTIONS
+                </a>
               </div>
-              <button className="w-full py-4 border border-(--border) text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-luxury text-(--foreground)">
-                Get Directions
-              </button>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-(--border) flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-(--zinc-muted) text-[10px] font-bold uppercase tracking-widest">
-            © 2024 Newland Photobook. Designed by <a href="https://skytechghana.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold-light transition-luxury">SkytechGhana</a>
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12">
+          <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-slate-400">
+            © 2024 NEWLAND STUDIOS. DESIGNED BY <a href="https://skytechghana.com" className="text-(--accent-primary)">SKYTECH</a>
           </p>
-          <div className="flex gap-10 text-[9px] font-black uppercase tracking-widest text-(--zinc-muted)">
-            <a href="#" className="hover:text-gold transition-luxury">Privacy Policy</a>
-            <a href="#" className="hover:text-(--foreground) transition-luxury">Terms of Service</a>
+          <div className="flex gap-12 text-[9px] font-bold uppercase tracking-[0.4em] text-slate-400">
+            <a href="#" className="hover:text-(--foreground)">Privacy</a>
+            <a href="#" className="hover:text-(--foreground)">Terms</a>
           </div>
         </div>
       </div>

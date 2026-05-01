@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-charcoal: #121212;
-  --color-gold: #D4AF37;
-  --color-gold-light: #F1D592;
-  --color-off-white: #FAFAFA;
+  --color-studio-bg: #FFFFFF;
+  --color-studio-text: #0F172A;
+  --color-electric: #6366F1;
+  --color-violet-vibrant: #8B5CF6;
+  --color-teal-modern: #14B8A6;
 }
 
 html {
@@ -12,121 +13,104 @@ html {
 }
 
 :root {
-  --background: #FAFAFA;
-  --foreground: #121212;
-  --card-bg: #FFFFFF;
-  --border: rgba(0, 0, 0, 0.05);
-  --gold: #D4AF37;
-  --gold-light: #F1D592;
-  --zinc-muted: #4b5563;
-  --nav-bg: rgba(255, 255, 255, 0.8);
-}
-
-.dark {
-  --background: #121212;
-  --foreground: #FAFAFA;
-  --card-bg: #1A1A1A;
-  --border: rgba(255, 255, 255, 0.05);
-  --zinc-muted: #a1a1aa;
-  --nav-bg: rgba(18, 18, 18, 0.8);
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --accent-primary: #6366F1;
+  --accent-secondary: #8B5CF6;
+  --card-bg: #F8FAFC;
+  --border: rgba(99, 102, 241, 0.1);
+  --zinc-muted: #64748B;
+  --nav-bg: rgba(255, 255, 255, 0.85);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .font-serif {
   font-family: var(--font-playfair), serif;
 }
 
-.gold-gradient {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+.font-display {
+  font-family: var(--font-syncopate), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.modern-gradient {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+}
+
+.vibrant-gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gold-bg-gradient {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+.glass-vibrant {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(99, 102, 241, 0.1);
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.premium-card-shadow {
+  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.15);
 }
 
-.premium-border {
-  border: 1px solid rgba(212, 175, 55, 0.2);
+/* Dynamic Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
-.premium-border:hover {
-  border: 1px solid rgba(212, 175, 55, 0.5);
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.05); }
 }
 
-/* Custom animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes imageReveal {
+  from { clip-path: inset(100% 0 0 0); opacity: 0; }
+  to { clip-path: inset(0% 0 0 0); opacity: 1; }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.animate-image-reveal {
+  animation: imageReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
-.animate-fade-up {
-  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.text-reveal {
+  mask-image: linear-gradient(to bottom, white 0%, white 100%);
+  mask-size: 100% 0%;
+  mask-repeat: no-repeat;
+  transition: mask-size 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-@keyframes kenBurns {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+.text-reveal.active {
+  mask-size: 100% 100%;
 }
 
-@keyframes bounceSubtle {
-  0%, 100% { transform: translateY(0) rotate(-6deg); }
-  50% { transform: translateY(-10px) rotate(-6deg); }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes revealColor {
-  0% { filter: grayscale(1) brightness(0.4); }
-  100% { filter: grayscale(0) brightness(1); }
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
 }
 
-.animate-reveal-color {
-  animation: revealColor 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.animate-ken-burns {
-  animation: kenBurns 20s ease-out infinite alternate;
-}
-
-.animate-bounce-subtle {
-  animation: bounceSubtle 4s ease-in-out infinite;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+  border-radius: 10px;
 }
 
