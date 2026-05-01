@@ -4,10 +4,10 @@ import { NextRequest } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
-  const pathParts = await params.path;
-  const key = pathParts.join("/");
+  const { path } = await params;
+  const key = path.join("/");
 
   try {
     const command = new GetObjectCommand({

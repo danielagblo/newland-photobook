@@ -5,14 +5,14 @@ import Inquiry from '@/lib/models/Inquiry';
 export async function POST(request: Request) {
   try {
     await dbConnect();
-    const { name, email, projectType } = await request.json();
+    const { name, email, phone, message: projectMessage, projectType } = await request.json();
 
-    if (!name || !email || !projectType) {
+    if (!name || !email || !phone || !projectMessage || !projectType) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     // 1. Save to Database
-    const inquiry = await Inquiry.create({ name, email, projectType });
+    const inquiry = await Inquiry.create({ name, email, phone, projectType, message: projectMessage });
 
     // 2. Send SMS through Arkesel (Optional notification to owner)
     const ARKESEL_API_KEY = process.env.ARKESEL_API_KEY;
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const SENDER_ID = process.env.ARKESEL_SENDER_ID || 'NewlandLab';
 
     if (ARKESEL_API_KEY && OWNER_PHONE) {
-      const message = `New Inquiry from ${name} (${email}): Interested in ${projectType}. Check admin panel.`;
+      const smsBody = `New Inquiry: ${name}\nPhone: ${phone}\nProject: ${projectType}\nMessage: ${projectMessage.substring(0, 50)}...`;
       
       try {
         await fetch('https://sms.arkesel.com/sms/api?action=send-sms', {
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
             action: 'send-sms',
             to: OWNER_PHONE,
             from: SENDER_ID,
-            sms: message
+            sms: smsBody
           })
         });
       } catch (smsError) {

@@ -43,11 +43,13 @@ function ContactSlideshow() {
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   // Form State
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    message: "",
     projectType: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,7 +61,7 @@ export default function Home() {
 
   const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.projectType) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.message || !formData.projectType) {
       alert("Please fill in all fields and select a project type.");
       return;
     }
@@ -76,7 +78,7 @@ export default function Home() {
 
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ name: "", email: "", projectType: "" });
+        setFormData({ name: "", email: "", phone: "", message: "", projectType: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -92,29 +94,29 @@ export default function Home() {
     <div className="min-h-screen bg-(--background) text-(--foreground) selection:bg-(--accent-primary) selection:text-white">
 
       {/* Hero Section - Viewport Optimized Full Height */}
-      <section className="relative h-screen min-h-[550px] flex items-center pt-24 lg:pt-32 overflow-hidden bg-white">
+      <section className="relative h-screen min-h-[550px] flex items-center pt-32 md:pt-24 lg:pt-32 overflow-hidden bg-white">
         {/* Animated Background Blobs */}
-        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[90%] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse-slow" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[50%] h-[70%] bg-violet-500/10 rounded-full blur-[120px] animate-pulse-slow" />
+        <div className="absolute top-[-20%] right-[-10%] w-[100%] lg:w-[70%] h-[90%] bg-indigo-500/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-violet-500/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
 
-        <div className="container mx-auto px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-          <div className="lg:col-span-6 space-y-4 lg:space-y-6">
+        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-6 space-y-4 lg:space-y-6 text-center lg:text-left">
             <div className={`space-y-3 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center lg:justify-start gap-4">
                 <span className="w-8 h-[2px] bg-indigo-500" />
                 <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-indigo-600">EST. 1955 • ACCRA GHANA</span>
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.9] tracking-tighter">
-                PURE <br />
-                <span className="vibrant-gradient-text italic font-light">VISION.</span>
+              <h1 className="text-3xl md:text-6xl lg:text-7xl font-display leading-[0.9] tracking-tighter">
+                PURE <span className="text-(--accent-primary) italic">VISION.</span> <br />
+                DIGITAL LAB.
               </h1>
             </div>
 
-            <p className={`text-slate-500 max-w-sm text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <p className={`text-slate-500 max-w-sm mx-auto lg:mx-0 text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               Archival precision meets contemporary visual culture. We preserve the soul of the image.
             </p>
 
-            <div className={`flex flex-wrap gap-4 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <a href="#services" className="px-7 py-3.5 modern-gradient text-white font-bold text-[8px] uppercase tracking-[0.3em] rounded-full premium-card-shadow hover:scale-105 transition-all">
                 START A PROJECT
               </a>
@@ -153,12 +155,12 @@ export default function Home() {
       </section>
 
       {/* Services Section - Modern Contemporary Grid */}
-      <section className="relative py-32 px-12 bg-slate-50/50">
+      <section className="relative py-20 lg:py-32 px-6 lg:px-12 bg-slate-50/50">
         <div id="services" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center space-y-6 mb-24">
+          <div className="text-center space-y-6 mb-16 lg:mb-24">
             <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Laboratory Services</span>
-            <h2 className="text-6xl md:text-7xl font-display tracking-tight">Contemporary <span className="text-slate-300">Output.</span></h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Contemporary <span className="text-slate-300">Output.</span></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -190,9 +192,9 @@ export default function Home() {
       </section>
 
       {/* Legacy Section - Contemporary Storytelling - About */}
-      <section className="relative py-32 px-12">
+      <section className="relative py-20 lg:py-32 px-6 lg:px-12">
         <div id="legacy" className="absolute top-24" />
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           <div className="lg:col-span-6 relative order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
@@ -221,7 +223,7 @@ export default function Home() {
           <div className="lg:col-span-6 space-y-10 order-1 lg:order-2">
             <div className="space-y-6">
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.6em]">The Evolution</span>
-              <h3 className="text-5xl md:text-7xl font-display leading-tight">Legacy Meets <br /><span className="italic">Future.</span></h3>
+              <h3 className="text-4xl md:text-7xl font-display leading-tight">Legacy Meets <br /><span className="italic">Future.</span></h3>
             </div>
             <div className="space-y-8 text-slate-500 text-xl font-light leading-relaxed">
               <p>
@@ -239,12 +241,12 @@ export default function Home() {
       </section>
 
       {/* Gallery Highlight - Contemporary Masonry */}
-      <section className="py-32 px-12 overflow-hidden">
+      <section className="py-20 lg:py-32 px-6 lg:px-12 overflow-hidden">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-10">
-            <div className="space-y-4">
+          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 lg:mb-20 gap-10">
+            <div className="space-y-4 text-center lg:text-left">
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Selected Work</span>
-              <h2 className="text-6xl md:text-8xl font-display tracking-tighter">The <span className="vibrant-gradient-text italic">Gallery.</span></h2>
+              <h2 className="text-4xl md:text-8xl font-display tracking-tighter">The <span className="vibrant-gradient-text italic">Gallery.</span></h2>
             </div>
             <Link href="/gallery" className="group flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.4em] text-slate-400 hover:text-indigo-600 transition-all">
               EXPLORE FULL GALLERY
@@ -252,9 +254,9 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-[900px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 h-auto lg:h-[900px]">
             {/* Main Feature */}
-            <div className="md:col-span-7 relative group overflow-hidden rounded-[2.5rem] premium-card-shadow">
+            <div className="md:col-span-7 relative group overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] premium-card-shadow aspect-[4/5] md:aspect-auto">
               <Image src="/images/hero-printer.png" alt="Work" fill className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
               <div className="absolute bottom-10 left-10 text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
@@ -284,73 +286,94 @@ export default function Home() {
       </section>
 
       {/* Contact Section - Modern Interaction */}
-      <section className="relative py-40 px-12">
+      <section className="relative py-20 lg:py-40 px-6 lg:px-12">
         <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
-          <div className="bg-white rounded-[3rem] premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
-            <div className="lg:w-1/2 relative min-h-[500px]">
+          <div className="bg-white rounded-[2rem] lg:rounded-[3rem] premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
+            <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-[500px]">
               <ContactSlideshow />
               <div className="absolute inset-0 bg-indigo-600/10" />
-              <div className="absolute inset-0 flex items-center justify-center p-12">
-                <div className="glass-vibrant p-12 rounded-[2rem] text-center space-y-6 max-w-md">
-                  <h2 className="text-4xl font-display text-slate-800">Start Your <br />Project.</h2>
+              <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
+                <div className="glass-vibrant p-8 lg:p-12 rounded-[1.5rem] lg:rounded-[2rem] text-center space-y-6 max-w-md">
+                  <h2 className="text-3xl lg:text-4xl font-display text-slate-800">Start Your <br />Project.</h2>
                   <div className="w-12 h-1 bg-(--accent-primary) mx-auto rounded-full" />
                   <p className="text-slate-600 font-light">Collaborate with our archival specialists to bring your vision to life.</p>
                 </div>
               </div>
             </div>
 
-            <div className="lg:w-1/2 p-12 md:p-24 space-y-12">
+            <div className="lg:w-1/2 p-8 md:p-12 lg:p-24 space-y-10 lg:space-y-12">
               <h3 className="text-3xl font-display text-slate-800">Inquiry.</h3>
-              <form onSubmit={handleInquirySubmit} className="space-y-10">
+              <form onSubmit={handleInquirySubmit} className="space-y-8 lg:space-y-10">
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Your Identity</label>
-                  <input 
-                    type="text" 
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Full Name</label>
+                  <input
+                    type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" 
-                    placeholder="Full Name" 
+                    className="w-full bg-slate-50 border-none outline-none p-5 lg:p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    placeholder="Full Name"
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Electronic Mail</label>
-                  <input 
-                    type="email" 
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Email</label>
+                  <input
+                    type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all" 
-                    placeholder="email@address.com" 
+                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    placeholder="email@address.com"
                   />
                 </div>
+                <div className="space-y-4">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Phone Number</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    placeholder="+233 XX XXX XXXX"
+                  />
+                </div>
+                <div className="space-y-4">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Tell us about your project</label>
+                  <textarea 
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all resize-none" 
+                    placeholder="Describe your vision, requirements, or any specific details..." 
+                  />
+                </div>
+
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Project Type</label>
                   <div className="grid grid-cols-2 gap-4">
                     {['Photobook', 'Printing', 'Framing', 'Other'].map(type => (
-                      <button 
-                        key={type} 
-                        type="button" 
+                      <button
+                        key={type}
+                        type="button"
                         onClick={() => setFormData({ ...formData, projectType: type })}
-                        className={`py-4 px-6 rounded-xl text-sm font-semibold transition-all ${
-                          formData.projectType === type 
-                          ? "bg-(--accent-primary) text-white shadow-lg scale-105" 
-                          : "bg-slate-50 text-slate-600 hover:bg-slate-100"
-                        }`}
+                        className={`py-4 px-6 rounded-xl text-sm font-semibold transition-all ${formData.projectType === type
+                            ? "bg-(--accent-primary) text-white shadow-lg scale-105"
+                            : "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                          }`}
                       >
                         {type}
                       </button>
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="space-y-4">
-                  <button 
+                  <button
                     disabled={isSubmitting}
-                    className={`w-full py-6 modern-gradient text-white font-bold text-[11px] uppercase tracking-[0.5em] rounded-2xl premium-card-shadow transition-all ${
-                      isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02] active:scale-[0.98]"
-                    }`}
+                    className={`w-full py-6 modern-gradient text-white font-bold text-[11px] uppercase tracking-[0.5em] rounded-2xl premium-card-shadow transition-all ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02] active:scale-[0.98]"
+                      }`}
                   >
                     {isSubmitting ? "SENDING..." : "SEND REQUEST"}
                   </button>

@@ -149,21 +149,48 @@ export default function AdminPage() {
               ) : inquiries.length > 0 ? (
                 <div className="grid gap-6">
                   {inquiries.map((inquiry) => (
-                    <div key={inquiry._id} className="bg-slate-50 p-8 rounded-3xl border border-slate-100 premium-card-shadow flex flex-col md:flex-row justify-between items-center gap-6">
-                      <div className="space-y-2 text-center md:text-left">
-                        <div className="flex items-center gap-3 justify-center md:justify-start">
-                          <h3 className="text-xl font-bold">{inquiry.name}</h3>
-                          <span className="px-3 py-1 bg-indigo-100 text-indigo-600 text-[9px] font-black uppercase tracking-widest rounded-full">{inquiry.projectType}</span>
+                    <div key={inquiry._id} className="bg-slate-50 p-6 md:p-10 rounded-[2rem] lg:rounded-[2.5rem] border border-slate-100 premium-card-shadow space-y-6 md:space-y-8">
+                      <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-6">
+                        <div className="space-y-3 w-full md:w-auto">
+                          <div className="flex flex-col md:flex-row md:items-center gap-3">
+                            <h3 className="text-xl md:text-2xl font-bold text-slate-800 break-words">{inquiry.name}</h3>
+                            <span className="inline-block w-fit px-4 py-1.5 bg-indigo-500 text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg shadow-indigo-500/20">
+                              {inquiry.projectType}
+                            </span>
+                          </div>
+                          <div className="flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-4 text-slate-500 font-light text-sm">
+                            <div className="flex items-center gap-2">
+                              <svg className="w-4 h-4 text-indigo-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              </svg>
+                              <span className="break-all">{inquiry.email}</span>
+                            </div>
+                            <span className="hidden md:block text-slate-200">|</span>
+                            <div className="flex items-center gap-2">
+                              <svg className="w-4 h-4 text-indigo-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5.172a3 3 0 01.828-2.12l.707-.707a1 1 0 011.414 0L8 4.414a1 1 0 010 1.414L6.414 7.414a1 1 0 000 1.414L8.586 11l.707.707a1 1 0 010 1.414l-2.12 2.12a3 3 0 01-4.244 0l-2.12-2.12a3 3 0 010-4.244l2.12-2.12z" />
+                              </svg>
+                              {inquiry.phone}
+                            </div>
+                          </div>
                         </div>
-                        <p className="text-slate-500 font-light">{inquiry.email}</p>
+                        
+                        <div className="text-left md:text-right space-y-1 shrink-0">
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            {new Date(inquiry.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </p>
+                          <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+                            {new Date(inquiry.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-center md:items-end gap-1">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                          {new Date(inquiry.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                        </span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                          {new Date(inquiry.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
-                        </span>
+
+                      <div className="bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 shadow-sm relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500 group-hover:w-2 transition-all" />
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-300 block mb-4">Project Brief</span>
+                        <p className="text-slate-600 text-base md:text-lg font-light leading-relaxed whitespace-pre-wrap">
+                          {inquiry.message}
+                        </p>
                       </div>
                     </div>
                   ))}

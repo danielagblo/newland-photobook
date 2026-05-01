@@ -22,16 +22,16 @@ export default async function GalleryPage() {
   return (
     <div className="min-h-screen bg-(--background) text-(--foreground) pb-32">
 
-      <main className="pt-48 px-12">
-        <div className="container mx-auto max-w-7xl space-y-24">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
+      <main className="pt-32 md:pt-48 px-6 md:px-12">
+        <div className="container mx-auto max-w-7xl space-y-16 md:space-y-24">
+          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-10 lg:gap-12 text-center lg:text-left">
             <div className="space-y-6">
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Gallery</span>
-              <h1 className="text-7xl md:text-9xl font-display tracking-tighter">
+              <h1 className="text-4xl md:text-9xl font-display tracking-tighter leading-tight">
                 Visual <br /><span className="vibrant-gradient-text italic">Chronicles.</span>
               </h1>
             </div>
-            <p className="text-slate-500 max-w-sm text-xl font-light leading-relaxed mb-4">
+            <p className="text-slate-500 max-w-sm text-lg md:text-xl font-light leading-relaxed">
               A dynamic showcase of our laboratory's commitment to high-fidelity color and contemporary archival standards.
             </p>
           </div>
