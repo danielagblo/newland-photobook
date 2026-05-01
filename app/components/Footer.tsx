@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--background)] pt-16 pb-12 px-12 border-t border-[var(--border)] relative overflow-hidden transition-colors duration-500">
+    <footer className="bg-[var(--background)] pt-8 pb-4 px-12 border-t border-[var(--border)] relative overflow-hidden transition-colors duration-500">
       {/* Subtle Background Glow */}
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[150px] translate-x-1/4 translate-y-1/4" />
       
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 gold-bg-gradient flex items-center justify-center rounded-sm">
                 <span className="text-charcoal font-black text-2xl">N</span>
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           {/* Quick Links Column */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Navigation</h4>
             <ul className="space-y-4">
               <li><Link href="/#printing" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Expertise</Link></li>
@@ -44,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Hours Column */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Operating Hours</h4>
             <ul className="space-y-3 text-[var(--zinc-muted)] text-sm font-light">
               <li className="flex justify-between"><span>Mon - Thu</span> <span className="text-[var(--foreground)]">8:00 - 17:00</span></li>
@@ -55,7 +55,7 @@ export function Footer() {
           </div>
 
           {/* Location Column */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Location</h4>
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
@@ -78,7 +78,7 @@ export function Footer() {
 
         <div className="pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[var(--zinc-muted)] text-[10px] font-bold uppercase tracking-widest">
-            © 2024 Newland Photobook. Handcrafted with Precision.
+            © 2024 Newland Photobook. Designed by <a href="https://skytechghana.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold-light transition-luxury">SkytechGhana</a>
           </p>
           <div className="flex gap-10 text-[9px] font-black uppercase tracking-widest text-[var(--zinc-muted)]">
             <a href="#" className="hover:text-gold transition-luxury">Privacy Policy</a>
