@@ -30,52 +30,6 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 bg-[var(--background)] text-[var(--foreground)] selection:bg-gold selection:text-charcoal`}>
-      {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full glass-panel py-5 px-12 flex justify-between items-center border-b border-[var(--border)] bg-[var(--nav-bg)]">
-        <div className="flex items-center gap-4 group cursor-pointer">
-          <div className="w-10 h-10 gold-bg-gradient flex items-center justify-center rounded-sm transition-luxury group-hover:rotate-12">
-            <span className="text-charcoal font-black text-xl">N</span>
-          </div>
-          <div className="flex flex-col -space-y-1">
-            <span className="text-xl font-black tracking-tighter gold-gradient">NEWLAND</span>
-            <span className="text-[9px] font-bold tracking-[0.4em] opacity-50 uppercase">Photobook</span>
-          </div>
-        </div>
-        <div className="hidden lg:flex gap-12 text-[11px] font-black tracking-[0.3em] uppercase text-[var(--foreground)]">
-          <a href="#printing" className="hover:text-gold transition-luxury relative group">
-            Expertise
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
-          </a>
-          <a href="#portfolio" className="hover:text-gold transition-luxury relative group">
-            Gallery
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
-          </a>
-          <a href="#about" className="hover:text-gold transition-luxury relative group">
-            History
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
-          </a>
-          <a href="#contact" className="hover:text-gold transition-luxury relative group">
-            Contact
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
-          </a>
-        </div>
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={toggleTheme}
-            className="p-3 bg-[var(--border)] rounded-full hover:scale-110 transition-luxury"
-            aria-label="Toggle Theme"
-          >
-            {theme === 'dark' ? (
-              <svg className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" /></svg>
-            ) : (
-              <svg className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>
-            )}
-          </button>
-          <button className="hidden md:block px-8 py-3 bg-white/5 border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal transition-luxury">
-            Start Project
-          </button>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center px-12 overflow-hidden bg-black">
@@ -109,13 +63,13 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap gap-8 pt-4 animate-fade-in opacity-0 [animation-delay:800ms] [animation-fill-mode:forwards]">
-              <button className="px-12 py-5 bg-gold text-charcoal font-black text-xs uppercase tracking-[0.2em] hover:bg-white transition-luxury shadow-2xl shadow-gold/20">
+              <a href="#printing" className="px-12 py-5 bg-gold text-charcoal font-black text-xs uppercase tracking-[0.2em] hover:bg-white transition-luxury shadow-2xl shadow-gold/20 inline-block">
                 Explore Services
-              </button>
-              <button className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] text-[var(--foreground)] hover:text-gold transition-luxury">
+              </a>
+              <Link href="/gallery" className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] text-[var(--foreground)] hover:text-gold transition-luxury">
                 <span className="w-12 h-[1px] bg-gold/30 group-hover:bg-gold transition-luxury" />
                 See Our Work
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -295,7 +249,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-32 px-8 bg-[var(--background)] transition-colors duration-500 relative">
+      <section id="innovation" className="py-32 px-8 bg-[var(--background)] transition-colors duration-500 relative">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div className="relative aspect-square">
             <div className="absolute inset-0 border-[20px] border-[var(--border)] translate-x-10 translate-y-10 z-0" />
@@ -329,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section - Compact Editorial */}
-      <section id="contact-form" className="py-0 px-0 bg-[var(--background)] overflow-hidden border-t border-[var(--border)] transition-colors duration-500">
+      <section id="contact" className="py-0 px-0 bg-[var(--background)] overflow-hidden border-t border-[var(--border)] transition-colors duration-500">
         <div className="flex flex-col lg:flex-row h-full min-h-[500px]">
           {/* Left Side: Imagery */}
           <div className="lg:w-1/3 relative min-h-[300px]">
@@ -406,92 +360,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer id="contact" className="bg-[var(--background)] pt-16 pb-12 px-12 border-t border-[var(--border)] relative overflow-hidden transition-colors duration-500">
-        {/* Subtle Background Glow */}
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[150px] translate-x-1/4 translate-y-1/4" />
-        
-        <div className="container mx-auto max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
-            {/* Brand Column */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 gold-bg-gradient flex items-center justify-center rounded-sm">
-                  <span className="text-charcoal font-black text-2xl">N</span>
-                </div>
-                <div className="flex flex-col -space-y-1">
-                  <span className="text-2xl font-black tracking-tighter text-[var(--foreground)]">NEWLAND</span>
-                  <span className="text-[10px] font-bold tracking-[0.4em] text-gold uppercase">Photobook</span>
-                </div>
-              </div>
-              <p className="text-[var(--zinc-muted)] text-sm leading-relaxed font-light">
-                Preserving Ghanaian heritage through archival precision and digital innovation since 1955.
-              </p>
-              <div className="flex gap-6">
-                <a href="https://www.facebook.com/modernphotolab/" target="_blank" className="text-[var(--zinc-muted)] hover:text-gold transition-luxury">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/opoku-newland-37596b265" target="_blank" className="text-[var(--zinc-muted)] hover:text-gold transition-luxury">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.58c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.15 1.46-2.15 2.96v5.7h-3.56V9h3.41v1.56h.05c.48-.9 1.64-1.86 3.38-1.86 3.63 0 4.3 2.39 4.3 5.5v6.25z"/></svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Quick Links Column */}
-            <div className="space-y-8">
-              <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Navigation</h4>
-              <ul className="space-y-4">
-                <li><a href="#" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Expertise</a></li>
-                <li><Link href="/gallery" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Full Gallery</Link></li>
-                <li><a href="#" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Our History</a></li>
-                <li><a href="#" className="text-[var(--zinc-muted)] text-sm hover:text-gold transition-luxury">Contact Lab</a></li>
-              </ul>
-            </div>
-
-            {/* Hours Column */}
-            <div className="space-y-8">
-              <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Operating Hours</h4>
-              <ul className="space-y-3 text-[var(--zinc-muted)] text-sm font-light">
-                <li className="flex justify-between"><span>Mon - Thu</span> <span className="text-[var(--foreground)]">8:00 - 17:00</span></li>
-                <li className="flex justify-between"><span>Friday</span> <span className="text-gold font-bold">Closed</span></li>
-                <li className="flex justify-between"><span>Saturday</span> <span className="text-[var(--foreground)]">9:00 - 17:00</span></li>
-                <li className="flex justify-between"><span>Sunday</span> <span className="opacity-50">Closed</span></li>
-              </ul>
-            </div>
-
-            {/* Location Column */}
-            <div className="space-y-8">
-              <h4 className="text-[var(--foreground)] text-[10px] font-black uppercase tracking-[0.4em]">Location</h4>
-              <div className="space-y-6">
-                <div className="flex gap-4 items-start">
-                  <svg className="w-5 h-5 text-gold mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <p className="text-[var(--zinc-muted)] text-sm leading-relaxed">
-                    Modern Photo Studio B,<br />
-                    New Town Lane, Accra,<br />
-                    Ghana
-                  </p>
-                </div>
-                <button className="w-full py-4 border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-luxury text-[var(--foreground)]">
-                  Get Directions
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[var(--zinc-muted)] text-[10px] font-bold uppercase tracking-widest">
-              © 2024 Newland Photobook. Handcrafted with Precision.
-            </p>
-            <div className="flex gap-10 text-[9px] font-black uppercase tracking-widest text-[var(--zinc-muted)]">
-              <a href="#" className="hover:text-gold transition-luxury">Privacy Policy</a>
-              <a href="#" className="hover:text-[var(--foreground)] transition-luxury">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );
