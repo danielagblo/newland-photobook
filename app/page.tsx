@@ -41,8 +41,8 @@ export default function Home() {
             <span className="text-[9px] font-bold tracking-[0.4em] opacity-50 uppercase">Photobook</span>
           </div>
         </div>
-        <div className="hidden lg:flex gap-12 text-[10px] font-bold tracking-[0.3em] uppercase">
-          <a href="#" className="hover:text-gold transition-luxury relative group">
+        <div className="hidden lg:flex gap-12 text-[11px] font-black tracking-[0.3em] uppercase text-[var(--foreground)]">
+          <a href="#printing" className="hover:text-gold transition-luxury relative group">
             Expertise
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full" />
           </a>
@@ -86,9 +86,9 @@ export default function Home() {
             alt="Professional Photography Equipment"
             fill
             priority
-            className="object-cover opacity-60 animate-ken-burns"
+            className="object-cover opacity-80 animate-ken-burns brightness-[0.7]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/70 via-[var(--background)]/20 to-transparent" />
         </div>
 
         <div className="container mx-auto max-w-7xl relative z-10 pt-24">
@@ -103,7 +103,7 @@ export default function Home() {
               <span className="italic font-light">Every Frame.</span>
             </h1>
 
-            <p className="text-[var(--zinc-muted)] max-w-xl text-lg font-light leading-relaxed animate-fade-in opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards]">
+            <p className="text-[var(--zinc-muted)] max-w-xl text-lg font-normal leading-relaxed animate-fade-in opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards]">
               Harnessing over six decades of heritage to deliver the pinnacle of digital printing and archival framing solutions. We don't just print; we preserve your legacy.
             </p>
 
@@ -111,8 +111,8 @@ export default function Home() {
               <button className="px-12 py-5 bg-gold text-charcoal font-black text-xs uppercase tracking-[0.2em] hover:bg-white transition-luxury shadow-2xl shadow-gold/20">
                 Explore Services
               </button>
-              <button className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] hover:text-gold transition-luxury">
-                <span className="w-12 h-[1px] bg-[var(--border)] group-hover:bg-gold transition-luxury" />
+              <button className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] text-[var(--foreground)] hover:text-gold transition-luxury">
+                <span className="w-12 h-[1px] bg-gold/30 group-hover:bg-gold transition-luxury" />
                 See Our Work
               </button>
             </div>
@@ -121,7 +121,7 @@ export default function Home() {
 
         {/* Centered Scroll Indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
-          <span className="text-[9px] font-black uppercase tracking-[0.5em] text-gold/60">Scroll to Explore</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.5em] text-gold">Scroll to Explore</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-gold/60 to-transparent animate-bounce-subtle" />
         </div>
       </section>
@@ -136,24 +136,24 @@ export default function Home() {
                 Our <span className="italic">Expertise</span>.
               </h3>
             </div>
-            <p className="text-[var(--zinc-muted)] max-w-sm text-lg font-light leading-relaxed">
+            <p className="text-[var(--zinc-muted)] max-w-sm text-lg font-normal leading-relaxed">
               Archival quality and precision in every service, from the lab to your walls.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Service 1 */}
-            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+            <div className="group relative aspect-[3/4] overflow-hidden bg-black cursor-pointer border border-[var(--border)]">
               <Image
                 src="/images/service-photobook.png"
                 alt="Custom Photobooks"
                 fill
                 className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
-                <h4 className="text-3xl font-serif text-[var(--foreground)] tracking-tight">Custom <br />Photobooks</h4>
+                <h4 className="text-3xl font-serif text-white tracking-tight">Custom <br />Photobooks</h4>
                 <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
-                  <p className="text-[var(--zinc-muted)] text-xs font-light leading-relaxed">
+                  <p className="text-zinc-200 text-xs font-light leading-relaxed">
                     Bespoke, hand-bound albums crafted with archival materials to preserve your most precious memories.
                   </p>
                   <div className="w-full h-[1px] bg-gold/50" />
@@ -162,18 +162,18 @@ export default function Home() {
             </div>
 
             {/* Service 2 */}
-            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+            <div className="group relative aspect-[3/4] overflow-hidden bg-black cursor-pointer border border-[var(--border)]">
               <Image
                 src="/images/service-printing.png"
                 alt="Digital Printing"
                 fill
                 className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
-                <h4 className="text-3xl font-serif text-[var(--foreground)] tracking-tight">Digital <br />Printing</h4>
+                <h4 className="text-3xl font-serif text-white tracking-tight">Digital <br />Printing</h4>
                 <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
-                  <p className="text-[var(--zinc-muted)] text-xs font-light leading-relaxed">
+                  <p className="text-zinc-200 text-xs font-light leading-relaxed">
                     High-fidelity digital prints using museum-grade inkjet technology and professional archival paper.
                   </p>
                   <div className="w-full h-[1px] bg-gold/50" />
@@ -182,18 +182,18 @@ export default function Home() {
             </div>
 
             {/* Service 3 */}
-            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+            <div className="group relative aspect-[3/4] overflow-hidden bg-black cursor-pointer border border-[var(--border)]">
               <Image
                 src="/images/service-framing.png"
                 alt="Professional Framing"
                 fill
                 className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
-                <h4 className="text-3xl font-serif text-[var(--foreground)] tracking-tight">Professional <br />Framing</h4>
+                <h4 className="text-3xl font-serif text-white tracking-tight">Professional <br />Framing</h4>
                 <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
-                  <p className="text-[var(--zinc-muted)] text-xs font-light leading-relaxed">
+                  <p className="text-zinc-200 text-xs font-light leading-relaxed">
                     Expertly joined museum frames and archival mounting solutions to protect and elevate your photography.
                   </p>
                   <div className="w-full h-[1px] bg-gold/50" />
@@ -202,18 +202,18 @@ export default function Home() {
             </div>
 
             {/* Service 4 */}
-            <div className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer border border-white/5">
+            <div className="group relative aspect-[3/4] overflow-hidden bg-black cursor-pointer border border-[var(--border)]">
               <Image
                 src="/images/service-canvas.png"
                 alt="Canvas Printing"
                 fill
                 className={`object-cover transition-luxury duration-1000 scale-105 group-hover:scale-100 ${isExpertiseVisible ? 'animate-reveal-color' : 'grayscale brightness-[0.4]'}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-luxury" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-luxury" />
               <div className="absolute inset-0 p-10 flex flex-col justify-end space-y-4">
-                <h4 className="text-3xl font-serif text-[var(--foreground)] tracking-tight">Canvas <br />Printing</h4>
+                <h4 className="text-3xl font-serif text-white tracking-tight">Canvas <br />Printing</h4>
                 <div className="max-h-0 group-hover:max-h-32 opacity-0 group-hover:opacity-100 transition-all duration-700 overflow-hidden space-y-4">
-                  <p className="text-[var(--zinc-muted)] text-xs font-light leading-relaxed">
+                  <p className="text-zinc-200 text-xs font-light leading-relaxed">
                     Premium 100% cotton canvas material with vibrant pigment inks, providing a gallery-ready finish.
                   </p>
                   <div className="w-full h-[1px] bg-gold/50" />
@@ -336,9 +336,9 @@ export default function Home() {
               src="/images/service-photobook.png" 
               alt="The Artisan Craft" 
               fill 
-              className="object-cover brightness-50"
+              className="object-cover brightness-[0.75]"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/40 to-transparent" />
             <div className="absolute inset-0 p-12 flex flex-col justify-end space-y-4">
               <h2 className="text-4xl font-serif text-[var(--foreground)] leading-tight">
                 Let's <span className="italic">Create</span>.
@@ -350,19 +350,19 @@ export default function Home() {
           {/* Right Side: Form */}
           <div className="lg:w-2/3 p-12 md:p-16 flex flex-col justify-center space-y-10 bg-[var(--card-bg)]">
             <form className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-              <div className="space-y-2 border-b border-white/10 focus-within:border-gold transition-luxury pb-2">
+              <div className="space-y-2 border-b border-[var(--border)] focus-within:border-gold transition-luxury pb-2">
                 <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Full Name</label>
                 <input 
                   type="text" 
-                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-zinc-800" 
+                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 
                   placeholder="Your Name"
                 />
               </div>
-              <div className="space-y-2 border-b border-white/10 focus-within:border-gold transition-luxury pb-2">
+              <div className="space-y-2 border-b border-[var(--border)] focus-within:border-gold transition-luxury pb-2">
                 <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Email</label>
                 <input 
                   type="email" 
-                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-zinc-800" 
+                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 
                   placeholder="email@example.com"
                 />
               </div>
@@ -370,7 +370,7 @@ export default function Home() {
                 <label className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">Message</label>
                 <input 
                   type="text" 
-                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-zinc-800" 
+                  className="w-full bg-transparent text-[var(--foreground)] text-base outline-none placeholder:text-[var(--zinc-muted)]/50" 
                   placeholder="Tell us about your project..."
                 />
               </div>
