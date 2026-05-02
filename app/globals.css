@@ -6,6 +6,10 @@
   --color-electric: #D4AF37;
   --color-violet-vibrant: #AF8B2F;
   --color-teal-modern: #152E28;
+  --color-accent-primary: #D4AF37;
+  --color-accent-secondary: #AF8B2F;
+  --color-card-bg: #152E28;
+  --color-zinc-muted: #8E9A96;
 }
 
 html {
@@ -18,13 +22,11 @@ html {
   --accent-primary: #D4AF37;
   --accent-secondary: #AF8B2F;
   --card-bg: #152E28;
-  --border: rgba(212, 175, 55, 0.15);
   --zinc-muted: #8E9A96;
-  --nav-bg: rgba(13, 31, 26, 0.85);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
   overflow-x: hidden;

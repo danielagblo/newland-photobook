@@ -100,37 +100,37 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-(--background) text-(--foreground) selection:bg-(--accent-primary) selection:text-white">
+    <div className="min-h-screen bg-studio-bg text-studio-text selection:bg-accent-primary selection:text-white">
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[550px] flex items-center pt-12 md:pt-24 lg:pt-32 overflow-hidden bg-(--background)">
-        <div className="absolute top-[-20%] right-[-10%] w-full lg:w-[70%] h-[90%] bg-(--accent-primary)/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-(--accent-secondary)/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
+      <section className="relative h-screen min-h-[550px] flex items-center pt-12 md:pt-24 lg:pt-32 overflow-hidden bg-studio-bg">
+        <div className="absolute top-[-20%] right-[-10%] w-full lg:w-[70%] h-[90%] bg-accent-primary/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-accent-secondary/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
 
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-6 space-y-4 lg:space-y-6 text-center lg:text-left">
             <div className={`space-y-3 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               <div className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-8 h-[2px] bg-(--accent-primary)" />
-                <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-(--accent-primary)">EST. 1955 • ACCRA GHANA</span>
+                <span className="w-8 h-[2px] bg-accent-primary" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-accent-primary">Welcome to Our Studio</span>
               </div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-display leading-[0.9] tracking-tighter">
-                PURE <span className="text-(--accent-primary) italic">VISION.</span> <br />
-                DIGITAL LAB.
+              <h1 className="text-3xl md:text-5xl lg:text-5xl font-display leading-[0.9] tracking-tighter">
+                CAPTURE <span className="text-(--accent-primary) italic">&</span> CREATE. <br />
+                ALL-IN-ONE STUDIO.
               </h1>
             </div>
 
-            <p className={`text-(--zinc-muted) max-w-sm mx-auto lg:mx-0 text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-              Archival precision meets contemporary visual culture. We preserve the soul of the image.
+            <p className={`text-zinc-muted max-w-md mx-auto lg:mx-0 text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+              We are a creative photo and video studio dedicated to capturing life’s most important moments with clarity, style, and emotion. Whether it’s a personal shoot or a large event, we bring your vision to life.
             </p>
 
             <div className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <a href="/#services" className="px-7 py-3.5 modern-gradient text-white font-bold text-[8px] uppercase tracking-[0.3em] rounded-full premium-card-shadow hover:scale-105 transition-all">
                 START A PROJECT
               </a>
-              <Link href="/gallery" className="group flex items-center gap-4 text-[8px] font-bold uppercase tracking-[0.3em] text-(--zinc-muted) hover:text-(--accent-primary) transition-all">
+              <Link href="/gallery" className="group flex items-center gap-4 text-[8px] font-bold uppercase tracking-[0.3em] text-zinc-muted hover:text-accent-primary transition-all">
                 EXPLORE GALLERY
-                <div className="w-6 h-[2px] bg-(--border) group-hover:w-12 group-hover:bg-(--accent-primary) transition-all duration-500" />
+                <div className="w-6 h-[2px] bg-white/10 group-hover:w-12 group-hover:bg-accent-primary transition-all duration-500" />
               </Link>
             </div>
           </div>
@@ -160,18 +160,18 @@ export default function Home() {
         <div id="services" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
           <div className="text-center space-y-6 mb-16 lg:mb-24">
-            <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Laboratory Services</span>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Contemporary <span className="text-(--zinc-muted)">Output.</span></h2>
+            <span className="text-accent-primary text-[12px] font-bold uppercase tracking-[0.8em]">What We Do</span>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Specialized <span className="text-zinc-muted">Services.</span></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Fine Art Books", desc: "Bespoke hand-bound monographs with silk and premium papers.", img: "/images/service-photobook.png" },
-              { title: "Chromatic Prints", desc: "Museum-grade inkjet prints with high-dynamic range calibration.", img: "/images/service-printing.png" },
-              { title: "Exhibition Framing", desc: "Precision-joined frames with anti-reflective visual clarity.", img: "/images/service-framing.png" },
-              { title: "Gallery Canvas", desc: "Deep-edge canvas wraps with protective satin polymer coating.", img: "/images/service-canvas.png" }
+              { title: "Photoshoots", desc: "Professional portraits, fashion, and lifestyle photography in-studio or on-location.", img: "/images/service-photobook.png" },
+              { title: "Video Production", desc: "High-end commercials, interviews, and promos tailored to your brand story.", img: "/images/service-printing.png" },
+              { title: "Event Coverage", desc: "Capturing weddings, birthdays, and corporate events with cinematic precision.", img: "/images/service-framing.png" },
+              { title: "Post-Production", desc: "Expert editing and color grading to ensure every frame meets the highest standards.", img: "/images/service-canvas.png" }
             ].map((service, i) => (
-              <div key={i} className="group cursor-pointer bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow hover:-translate-y-4 transition-all duration-700">
+              <div key={i} className="group cursor-pointer bg-card-bg p-4 rounded-3xl border border-white/10 premium-card-shadow hover:-translate-y-4 transition-all duration-700">
                 <div className="relative aspect-square overflow-hidden rounded-2xl mb-8">
                   <img
                     src={service.img}
@@ -180,8 +180,8 @@ export default function Home() {
                   />
                 </div>
                 <div className="px-4 pb-4 space-y-3">
-                  <h3 className="text-2xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors duration-300">{service.title}</h3>
-                  <p className="text-sm text-(--zinc-muted) font-light leading-relaxed">
+                  <h3 className="text-lg font-display text-studio-text group-hover:text-accent-primary transition-colors duration-300">{service.title}</h3>
+                  <p className="text-sm text-zinc-muted font-light leading-relaxed">
                     {service.desc}
                   </p>
                 </div>
@@ -221,15 +221,15 @@ export default function Home() {
 
           <div className="lg:col-span-6 space-y-10 order-1 lg:order-2">
             <div className="space-y-6">
-              <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.6em]">The Evolution</span>
-              <h3 className="text-4xl md:text-7xl font-display leading-tight">Legacy Meets <br /><span className="italic">Future.</span></h3>
+              <span className="text-(--accent-primary) text-[12px] font-bold uppercase tracking-[0.6em]">OUR MISSION</span>
+              <h3 className="text-4xl md:text-5xl font-display leading-tight">Why Choose <br /><span className="italic">Us.</span></h3>
             </div>
-            <div className="space-y-8 text-(--zinc-muted) text-xl font-light leading-relaxed">
+            <div className="space-y-8 text-(--zinc-muted) text-lg font-light leading-relaxed">
               <p>
-                Originating from the legendary Modern Photo Studio B, we have evolved into a powerhouse of contemporary digital imaging.
+                We combine creativity with modern equipment to deliver high-quality visuals that stand out. Our team pays attention to detail, ensuring every shot tells a story.
               </p>
               <p>
-                We don't just look back; we push the boundaries of what's possible in archival science. Our lab is a playground for visualists who demand nothing but the absolute peak of quality.
+                Whether it’s a personal shoot or a large event, we are here to make your ideas a reality and ensure every project meets your expectations.
               </p>
             </div>
             <button className="px-12 py-5 border-2 border-(--accent-primary) text-(--accent-primary) font-bold text-[11px] uppercase tracking-[0.4em] rounded-full hover:bg-(--accent-primary) hover:text-white transition-all duration-500">
@@ -244,12 +244,12 @@ export default function Home() {
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 lg:mb-20 gap-10">
             <div className="space-y-4 text-center lg:text-left">
-              <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Selected Work</span>
-              <h2 className="text-4xl md:text-8xl font-display tracking-tighter">The <span className="vibrant-gradient-text italic">Gallery.</span></h2>
+              <span className="text-accent-primary text-[12px] font-bold uppercase tracking-[0.8em]">Selected Work</span>
+              <h2 className="text-4xl md:text-7xl font-display tracking-tighter">The <span className="vibrant-gradient-text italic">Gallery.</span></h2>
             </div>
-            <Link href="/gallery" className="group flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted) hover:text-(--accent-primary) transition-all">
+            <Link href="/gallery" className="group flex items-center gap-4 text-[12px] font-bold uppercase tracking-[0.4em] text-zinc-muted hover:text-accent-primary transition-all">
               EXPLORE FULL GALLERY
-              <div className="w-8 h-[2px] bg-(--border) group-hover:w-16 group-hover:bg-(--accent-primary) transition-all duration-500" />
+              <div className="w-8 h-[2px] bg-white/10 group-hover:w-16 group-hover:bg-accent-primary transition-all duration-500" />
             </Link>
           </div>
 
@@ -281,9 +281,9 @@ export default function Home() {
               <div className="absolute inset-0 bg-(--accent-primary)/10" />
               <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
                 <div className="glass-vibrant p-8 lg:p-12 rounded-3xl lg:rounded-4xl text-center space-y-6 max-w-md">
-                  <h2 className="text-3xl lg:text-4xl font-display text-(--foreground)">Start Your <br />Project.</h2>
+                  <h2 className="text-3xl lg:text-4xl font-display text-(--foreground)">Book a <br />Session.</h2>
                   <div className="w-12 h-1 bg-(--accent-primary) mx-auto rounded-full" />
-                  <p className="text-(--zinc-muted) font-light">Collaborate with our archival specialists to bring your vision to life.</p>
+                  <p className="text-(--zinc-muted) font-light">Ready to capture your moments? Get in touch with us today to discuss your project.</p>
                 </div>
               </div>
             </div>

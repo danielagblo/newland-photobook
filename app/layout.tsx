@@ -19,9 +19,9 @@ const syncopate = Syncopate({
 });
 
 export const metadata: Metadata = {
-  title: "NEWLAND STUDIOS | Archival Laboratory & Preservation",
-  description: "Six decades of visual excellence. Museum-grade printing, bespoke framing, and archival preservation in the heart of Accra.",
-  keywords: ["archival printing", "luxury photobooks", "museum framing", "digital lab accra", "photography preservation"],
+  title: "NEWLAND STUDIOS | Creative Photo & Video Studio",
+  description: "Capturing life’s most important moments with clarity, style, and emotion. Professional photography and video production in Accra.",
+  keywords: ["photography studio accra", "video production ghana", "event coverage", "professional photoshoots", "creative studio"],
   icons: {
     icon: [
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -45,7 +45,7 @@ export default function RootLayout({
       className={`${outfit.variable} ${playfair.variable} ${syncopate.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         {children}
       </body>
     </html>
