@@ -22,7 +22,7 @@ function ContactSlideshow() {
   }, [images.length]);
 
   return (
-    <div className="absolute inset-0 z-0 bg-slate-50">
+    <div className="absolute inset-0 z-0 bg-(--background)">
       {images.map((img, i) => (
         <div
           key={i}
@@ -94,35 +94,35 @@ export default function Home() {
     <div className="min-h-screen bg-(--background) text-(--foreground) selection:bg-(--accent-primary) selection:text-white">
 
       {/* Hero Section - Viewport Optimized Full Height */}
-      <section className="relative h-screen min-h-[550px] flex items-center pt-32 md:pt-24 lg:pt-32 overflow-hidden bg-white">
+      <section className="relative h-screen min-h-[550px] flex items-center pt-12 md:pt-24 lg:pt-32 overflow-hidden bg-(--background)">
         {/* Animated Background Blobs */}
-        <div className="absolute top-[-20%] right-[-10%] w-[100%] lg:w-[70%] h-[90%] bg-indigo-500/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-violet-500/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
+        <div className="absolute top-[-20%] right-[-10%] w-[100%] lg:w-[70%] h-[90%] bg-(--accent-primary)/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-(--accent-secondary)/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
 
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-6 space-y-4 lg:space-y-6 text-center lg:text-left">
             <div className={`space-y-3 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               <div className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-8 h-[2px] bg-indigo-500" />
-                <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-indigo-600">EST. 1955 • ACCRA GHANA</span>
+                <span className="w-8 h-[2px] bg-(--accent-primary)" />
+                <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-(--accent-primary)">EST. 1955 • ACCRA GHANA</span>
               </div>
-              <h1 className="text-3xl md:text-6xl lg:text-7xl font-display leading-[0.9] tracking-tighter">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-display leading-[0.9] tracking-tighter">
                 PURE <span className="text-(--accent-primary) italic">VISION.</span> <br />
                 DIGITAL LAB.
               </h1>
             </div>
 
-            <p className={`text-slate-500 max-w-sm mx-auto lg:mx-0 text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <p className={`text-(--zinc-muted) max-w-sm mx-auto lg:mx-0 text-sm md:text-base font-light leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               Archival precision meets contemporary visual culture. We preserve the soul of the image.
             </p>
 
             <div className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <a href="#services" className="px-7 py-3.5 modern-gradient text-white font-bold text-[8px] uppercase tracking-[0.3em] rounded-full premium-card-shadow hover:scale-105 transition-all">
+              <a href="/#services" className="px-7 py-3.5 modern-gradient text-white font-bold text-[8px] uppercase tracking-[0.3em] rounded-full premium-card-shadow hover:scale-105 transition-all">
                 START A PROJECT
               </a>
-              <Link href="/gallery" className="group flex items-center gap-4 text-[8px] font-bold uppercase tracking-[0.3em] text-slate-400 hover:text-indigo-600 transition-all">
+              <Link href="/gallery" className="group flex items-center gap-4 text-[8px] font-bold uppercase tracking-[0.3em] text-(--zinc-muted) hover:text-(--accent-primary) transition-all">
                 EXPLORE GALLERY
-                <div className="w-6 h-[2px] bg-slate-200 group-hover:w-12 group-hover:bg-indigo-500 transition-all duration-500" />
+                <div className="w-6 h-[2px] bg-(--border) group-hover:w-12 group-hover:bg-(--accent-primary) transition-all duration-500" />
               </Link>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function Home() {
                 priority
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-(--accent-primary)/10 to-transparent mix-blend-overlay" />
             </div>
 
             {/* Accent Layer 1 */}
@@ -155,12 +155,12 @@ export default function Home() {
       </section>
 
       {/* Services Section - Modern Contemporary Grid */}
-      <section className="relative py-20 lg:py-32 px-6 lg:px-12 bg-slate-50/50">
+      <section className="relative py-20 lg:py-32 px-6 lg:px-12 bg-(--card-bg)/50">
         <div id="services" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
           <div className="text-center space-y-6 mb-16 lg:mb-24">
             <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Laboratory Services</span>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Contemporary <span className="text-slate-300">Output.</span></h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Contemporary <span className="text-(--zinc-muted)">Output.</span></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -170,7 +170,7 @@ export default function Home() {
               { title: "Exhibition Framing", desc: "Precision-joined frames with anti-reflective visual clarity.", img: "/images/service-framing.png" },
               { title: "Gallery Canvas", desc: "Deep-edge canvas wraps with protective satin polymer coating.", img: "/images/service-canvas.png" }
             ].map((service, i) => (
-              <div key={i} className="group cursor-pointer bg-white p-4 rounded-3xl premium-card-shadow hover:-translate-y-4 transition-all duration-700">
+              <div key={i} className="group cursor-pointer bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow hover:-translate-y-4 transition-all duration-700">
                 <div className="relative aspect-square overflow-hidden rounded-2xl mb-8">
                   <Image
                     src={service.img}
@@ -180,8 +180,8 @@ export default function Home() {
                   />
                 </div>
                 <div className="px-4 pb-4 space-y-3">
-                  <h3 className="text-2xl font-display text-slate-800 group-hover:text-(--accent-primary) transition-colors duration-300">{service.title}</h3>
-                  <p className="text-sm text-slate-500 font-light leading-relaxed">
+                  <h3 className="text-2xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors duration-300">{service.title}</h3>
+                  <p className="text-sm text-(--zinc-muted) font-light leading-relaxed">
                     {service.desc}
                   </p>
                 </div>
@@ -225,7 +225,7 @@ export default function Home() {
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.6em]">The Evolution</span>
               <h3 className="text-4xl md:text-7xl font-display leading-tight">Legacy Meets <br /><span className="italic">Future.</span></h3>
             </div>
-            <div className="space-y-8 text-slate-500 text-xl font-light leading-relaxed">
+            <div className="space-y-8 text-(--zinc-muted) text-xl font-light leading-relaxed">
               <p>
                 Originating from the legendary Modern Photo Studio B, we have evolved into a powerhouse of contemporary digital imaging.
               </p>
@@ -248,9 +248,9 @@ export default function Home() {
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Selected Work</span>
               <h2 className="text-4xl md:text-8xl font-display tracking-tighter">The <span className="vibrant-gradient-text italic">Gallery.</span></h2>
             </div>
-            <Link href="/gallery" className="group flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.4em] text-slate-400 hover:text-indigo-600 transition-all">
+            <Link href="/gallery" className="group flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted) hover:text-(--accent-primary) transition-all">
               EXPLORE FULL GALLERY
-              <div className="w-8 h-[2px] bg-slate-200 group-hover:w-16 group-hover:bg-indigo-500 transition-all duration-500" />
+              <div className="w-8 h-[2px] bg-(--border) group-hover:w-16 group-hover:bg-(--accent-primary) transition-all duration-500" />
             </Link>
           </div>
 
@@ -273,10 +273,10 @@ export default function Home() {
                 <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow">
                   <Image src="/images/service-framing.png" alt="Work" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
                 </div>
-                <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow bg-slate-50 flex items-center justify-center p-8">
+                <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow bg-(--card-bg) flex items-center justify-center p-8 border border-(--border)">
                   <div className="text-center space-y-4">
                     <span className="text-3xl font-display vibrant-gradient-text">25k+</span>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400">Prints Produced</p>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-(--zinc-muted)">Prints Produced</p>
                   </div>
                 </div>
               </div>
@@ -289,78 +289,78 @@ export default function Home() {
       <section className="relative py-20 lg:py-40 px-6 lg:px-12">
         <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
-          <div className="bg-white rounded-[2rem] lg:rounded-[3rem] premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
+          <div className="bg-(--card-bg) rounded-[2rem] lg:rounded-[3rem] border border-(--border) premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
             <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-[500px]">
               <ContactSlideshow />
-              <div className="absolute inset-0 bg-indigo-600/10" />
+              <div className="absolute inset-0 bg-(--accent-primary)/10" />
               <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
                 <div className="glass-vibrant p-8 lg:p-12 rounded-[1.5rem] lg:rounded-[2rem] text-center space-y-6 max-w-md">
-                  <h2 className="text-3xl lg:text-4xl font-display text-slate-800">Start Your <br />Project.</h2>
+                  <h2 className="text-3xl lg:text-4xl font-display text-(--foreground)">Start Your <br />Project.</h2>
                   <div className="w-12 h-1 bg-(--accent-primary) mx-auto rounded-full" />
-                  <p className="text-slate-600 font-light">Collaborate with our archival specialists to bring your vision to life.</p>
+                  <p className="text-(--zinc-muted) font-light">Collaborate with our archival specialists to bring your vision to life.</p>
                 </div>
               </div>
             </div>
 
             <div className="lg:w-1/2 p-8 md:p-12 lg:p-24 space-y-10 lg:space-y-12">
-              <h3 className="text-3xl font-display text-slate-800">Inquiry.</h3>
+              <h3 className="text-3xl font-display text-(--foreground)">Inquiry.</h3>
               <form onSubmit={handleInquirySubmit} className="space-y-8 lg:space-y-10">
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Full Name</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Full Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-5 lg:p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    className="w-full bg-(--background) border border-(--border) outline-none p-5 lg:p-6 rounded-2xl text-(--foreground) placeholder:text-(--zinc-muted)/30 focus:ring-2 focus:ring-(--accent-primary) transition-all"
                     placeholder="Full Name"
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Email</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    className="w-full bg-(--background) border border-(--border) outline-none p-6 rounded-2xl text-(--foreground) placeholder:text-(--zinc-muted)/30 focus:ring-2 focus:ring-(--accent-primary) transition-all"
                     placeholder="email@address.com"
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Phone Number</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Phone Number</label>
                   <input
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all"
+                    className="w-full bg-(--background) border border-(--border) outline-none p-6 rounded-2xl text-(--foreground) placeholder:text-(--zinc-muted)/30 focus:ring-2 focus:ring-(--accent-primary) transition-all"
                     placeholder="+233 XX XXX XXXX"
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Tell us about your project</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Tell us about your project</label>
                   <textarea 
                     required
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-slate-50 border-none outline-none p-6 rounded-2xl text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-(--accent-primary) transition-all resize-none" 
+                    className="w-full bg-(--background) border border-(--border) outline-none p-6 rounded-2xl text-(--foreground) placeholder:text-(--zinc-muted)/30 focus:ring-2 focus:ring-(--accent-primary) transition-all resize-none" 
                     placeholder="Describe your vision, requirements, or any specific details..." 
                   />
                 </div>
 
                 <div className="space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Project Type</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Project Type</label>
                   <div className="grid grid-cols-2 gap-4">
                     {['Photobook', 'Printing', 'Framing', 'Other'].map(type => (
                       <button
                         key={type}
                         type="button"
                         onClick={() => setFormData({ ...formData, projectType: type })}
-                        className={`py-4 px-6 rounded-xl text-sm font-semibold transition-all ${formData.projectType === type
-                            ? "bg-(--accent-primary) text-white shadow-lg scale-105"
-                            : "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                        className={`py-4 px-6 rounded-xl text-sm font-semibold transition-all border border-(--border) ${formData.projectType === type
+                            ? "bg-(--accent-primary) text-(--background) shadow-lg scale-105"
+                            : "bg-(--background) text-(--zinc-muted) hover:bg-(--card-bg)"
                           }`}
                       >
                         {type}

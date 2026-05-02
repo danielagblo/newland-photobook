@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-studio-bg: #FFFFFF;
-  --color-studio-text: #0F172A;
-  --color-electric: #6366F1;
-  --color-violet-vibrant: #8B5CF6;
-  --color-teal-modern: #14B8A6;
+  --color-studio-bg: #0D1F1A;
+  --color-studio-text: #FDFCFB;
+  --color-electric: #D4AF37;
+  --color-violet-vibrant: #AF8B2F;
+  --color-teal-modern: #152E28;
 }
 
 html {
@@ -13,14 +13,14 @@ html {
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #0F172A;
-  --accent-primary: #6366F1;
-  --accent-secondary: #8B5CF6;
-  --card-bg: #F8FAFC;
-  --border: rgba(99, 102, 241, 0.1);
-  --zinc-muted: #64748B;
-  --nav-bg: rgba(255, 255, 255, 0.85);
+  --background: #0D1F1A;
+  --foreground: #FDFCFB;
+  --accent-primary: #D4AF37;
+  --accent-secondary: #AF8B2F;
+  --card-bg: #152E28;
+  --border: rgba(212, 175, 55, 0.15);
+  --zinc-muted: #8E9A96;
+  --nav-bg: rgba(13, 31, 26, 0.85);
 }
 
 body {
@@ -42,23 +42,23 @@ body {
 }
 
 .modern-gradient {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #AF8B2F 50%, #8C6D25 100%);
 }
 
 .vibrant-gradient-text {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #F3D991 50%, #AF8B2F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .glass-vibrant {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(21, 46, 40, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .premium-card-shadow {
-  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
 }
 
 /* Dynamic Animations */
@@ -99,18 +99,3 @@ body {
 .text-reveal.active {
   mask-size: 100% 100%;
 }
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #F1F5F9;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
-  border-radius: 10px;
-}
-
