@@ -1,16 +1,8 @@
-import Image from "next/image";
 import dbConnect from "@/lib/db";
 import GalleryImage from "@/lib/models/GalleryImage";
 
 export default async function GalleryPage() {
-  let images = [
-    { src: "/images/hero-printer.png", title: "Chromatic Master" },
-    { src: "/images/service-photobook.png", title: "Modern Album" },
-    { src: "/images/service-framing.png", title: "Vibrant Frame" },
-    { src: "/images/service-canvas.png", title: "Neon Canvas" },
-    { src: "/images/hero-editorial.png", title: "Studio Series" },
-    { src: "/images/print-cut.png", title: "Precision Output" },
-  ];
+  let images: any[] = [];
 
   try {
     await dbConnect();
@@ -19,11 +11,11 @@ export default async function GalleryPage() {
     if (dbImages && dbImages.length > 0) {
       images = dbImages.map((img: any) => ({
         src: img.url,
-        title: img.title
+        title: img.title || ""
       }));
     }
   } catch (error) {
-    console.error("Failed to fetch gallery images from DB, using fallbacks:", error);
+    console.error("Failed to fetch gallery images from DB:", error);
   }
 
   return (
@@ -43,31 +35,38 @@ export default async function GalleryPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {images.map((img: { src: string; title: string }, i: number) => (
-              <div key={i} className="group cursor-pointer space-y-8 bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow transition-all duration-500 hover:-translate-y-2">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                  <Image
-                    src={img.src}
-                    alt={img.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                  />
-                </div>
-                <div className="flex justify-between items-center px-4 pb-4">
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-bold tracking-[0.4em] text-(--zinc-muted)">#0{i + 1}</span>
-                    <h3 className="text-2xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors duration-300">{img.title}</h3>
+          {images.length > 0 ? (
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+              {images.map((img: { src: string; title: string }, i: number) => (
+                <div key={i} className="break-inside-avoid group cursor-pointer space-y-6 bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow transition-all duration-500 hover:-translate-y-2 mb-8">
+                  <div className="relative overflow-hidden rounded-2xl">
+                    <img
+                      src={img.src}
+                      alt={img.title}
+                      className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-1000"
+                    />
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-(--background) flex items-center justify-center group-hover:bg-(--accent-primary) group-hover:text-(--background) transition-all">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
+                  {(img.title || true) && (
+                    <div className="flex justify-between items-center px-2 pb-2">
+                      <div className="space-y-1">
+                        <span className="text-[9px] font-bold tracking-[0.4em] text-(--zinc-muted)">#0{i + 1}</span>
+                        <h3 className="text-xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors duration-300">{img.title}</h3>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-(--background) flex items-center justify-center group-hover:bg-(--accent-primary) group-hover:text-(--background) transition-all">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="py-40 text-center bg-(--card-bg) rounded-[3rem] border border-(--border)">
+               <p className="text-(--zinc-muted) font-light tracking-widest uppercase text-xs">Laboratory gallery is currently being curated.</p>
+            </div>
+          )}
         </div>
       </main>
 

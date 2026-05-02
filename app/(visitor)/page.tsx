@@ -3,16 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { getGalleryImages } from "@/app/(admin)/admin/actions";
 
 function ContactSlideshow() {
-  const images = [
+  const [images, setImages] = useState<string[]>([
     "/images/hero-printer.png",
     "/images/service-photobook.png",
-    "/images/hero-editorial.png",
-    "/images/service-framing.png",
-    "/images/service-canvas.png"
-  ];
+    "/images/hero-editorial.png"
+  ]);
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    async function fetchGallery() {
+      const result = await getGalleryImages();
+      if (result.success && result.images.length > 0) {
+        setImages(result.images.map((img: any) => img.url));
+      }
+    }
+    fetchGallery();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,6 +52,7 @@ function ContactSlideshow() {
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [galleryImages, setGalleryImages] = useState<any[]>([]);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -57,7 +67,18 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoaded(true);
+    fetchGallery();
   }, []);
+
+  const fetchGallery = async () => {
+    const result = await getGalleryImages();
+    if (result.success) {
+      setGalleryImages(result.images.map((img: any) => ({
+        src: img.url,
+        title: img.title || "Visual Archive"
+      })));
+    }
+  };
 
   const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,12 +148,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Layered Composition Hero Image - Compressed for Screen Safety */}
+          {/* Layered Composition Hero Image */}
           <div className="lg:col-span-6 relative h-[350px] lg:h-[450px] flex items-center justify-center">
-            {/* Main Image Layer */}
             <div className={`relative w-[80%] h-[85%] rounded-2xl overflow-hidden premium-card-shadow z-20 transition-all duration-1500 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <Image
-                src="/images/hero-printer.png"
+                src={galleryImages[0]?.src || "/images/hero-printer.png"}
                 alt="Studio High-End"
                 fill
                 priority
@@ -140,21 +160,17 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-(--accent-primary)/10 to-transparent mix-blend-overlay" />
             </div>
-
-            {/* Accent Layer 1 */}
             <div className={`absolute top-2 -right-2 w-[40%] h-[35%] rounded-xl overflow-hidden premium-card-shadow z-30 animate-float transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-              <Image src="/images/service-photobook.png" alt="Detail" fill className="object-cover" />
+              <Image src={galleryImages[1]?.src || "/images/service-photobook.png"} alt="Detail" fill className="object-cover" />
             </div>
-
-            {/* Accent Layer 2 */}
             <div className={`absolute -bottom-2 -left-2 w-[35%] h-[30%] rounded-xl overflow-hidden premium-card-shadow z-30 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <Image src="/images/hero-editorial.png" alt="Detail" fill className="object-cover" />
+              <Image src={galleryImages[2]?.src || "/images/hero-editorial.png"} alt="Detail" fill className="object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section - Modern Contemporary Grid */}
+      {/* Services Section */}
       <section className="relative py-20 lg:py-32 px-6 lg:px-12 bg-(--card-bg)/50">
         <div id="services" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
@@ -191,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Legacy Section - Contemporary Storytelling - About */}
+      {/* Legacy Section */}
       <section className="relative py-20 lg:py-32 px-6 lg:px-12">
         <div id="legacy" className="absolute top-24" />
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
@@ -199,22 +215,21 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden premium-card-shadow mt-12">
-                  <Image src="/images/hero-editorial.png" alt="Studio" fill className="object-cover" />
+                  <Image src={galleryImages[3]?.src || "/images/hero-editorial.png"} alt="Studio" fill className="object-cover" />
                 </div>
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src="/images/service-photobook.png" alt="Studio" fill className="object-cover" />
+                  <Image src={galleryImages[4]?.src || "/images/service-photobook.png"} alt="Studio" fill className="object-cover" />
                 </div>
               </div>
               <div className="space-y-6">
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src="/images/hero-printer.png" alt="Studio" fill className="object-cover" />
+                  <Image src={galleryImages[5]?.src || "/images/hero-printer.png"} alt="Studio" fill className="object-cover" />
                 </div>
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src="/images/service-framing.png" alt="Studio" fill className="object-cover" />
+                  <Image src={galleryImages[6]?.src || "/images/service-framing.png"} alt="Studio" fill className="object-cover" />
                 </div>
               </div>
             </div>
-            {/* Year Tag */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 modern-gradient rounded-full flex items-center justify-center text-white p-8 text-center premium-card-shadow z-20">
               <span className="text-4xl font-display tracking-widest">1955</span>
             </div>
@@ -240,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Highlight - Contemporary Masonry */}
+      {/* Gallery Highlight */}
       <section className="py-20 lg:py-32 px-6 lg:px-12 overflow-hidden">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 lg:mb-20 gap-10">
@@ -254,38 +269,30 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 h-auto lg:h-[900px]">
-            {/* Main Feature */}
-            <div className="md:col-span-7 relative group overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] premium-card-shadow aspect-[4/5] md:aspect-auto">
-              <Image src="/images/hero-printer.png" alt="Work" fill className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-              <div className="absolute bottom-10 left-10 text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
-                <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Chromatic Mastery</span>
-              </div>
-            </div>
-
-            <div className="md:col-span-5 grid grid-rows-2 gap-8">
-              <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow">
-                <Image src="/images/service-photobook.png" alt="Work" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-                <div className="absolute inset-0 bg-(--accent-primary)/10 opacity-0 group-hover:opacity-100 transition-all duration-700" />
-              </div>
-              <div className="grid grid-cols-2 gap-8">
-                <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow">
-                  <Image src="/images/service-framing.png" alt="Work" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-                </div>
-                <div className="relative group overflow-hidden rounded-[2rem] premium-card-shadow bg-(--card-bg) flex items-center justify-center p-8 border border-(--border)">
-                  <div className="text-center space-y-4">
-                    <span className="text-3xl font-display vibrant-gradient-text">25k+</span>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-(--zinc-muted)">Prints Produced</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {galleryImages.length > 0 ? galleryImages.slice(0, 6).map((img, i) => (
+              <div key={i} className="group relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-(--border) premium-card-shadow transition-all duration-700 hover:-translate-y-4">
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-[2000ms]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-(--background) via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-8 left-8 right-8 space-y-2 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                  <span className="text-[9px] font-bold tracking-[0.4em] text-(--accent-primary)">#0{i + 1}</span>
+                  <h4 className="text-xl font-display text-white">{img.title}</h4>
                 </div>
               </div>
-            </div>
+            )) : (
+              <div className="col-span-full py-20 text-center bg-(--card-bg) rounded-[3rem] border border-(--border)">
+                <p className="text-(--zinc-muted) font-light tracking-widest uppercase text-[10px]">Curation in progress...</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Contact Section - Modern Interaction */}
+      {/* Contact Section */}
       <section className="relative py-20 lg:py-40 px-6 lg:px-12">
         <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
