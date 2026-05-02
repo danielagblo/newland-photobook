@@ -1,6 +1,6 @@
 "use server";
 
-import { processAndUpload } from "@/lib/s3";
+import { processAndUpload, deleteFromS3 } from "@/lib/s3";
 import { revalidatePath } from "next/cache";
 import dbConnect from "@/lib/db";
 import GalleryImage from "@/lib/models/GalleryImage";
@@ -111,6 +111,13 @@ export async function saveProduct(formData: FormData) {
 export async function deleteProduct(id: string) {
   try {
     await dbConnect();
+    const product = await Product.findById(id);
+    if (product && product.images) {
+      // Delete all images from S3
+      for (const url of product.images) {
+        await deleteFromS3(url);
+      }
+    }
     await Product.findByIdAndDelete(id);
     revalidatePath("/products");
     revalidatePath("/");
@@ -124,6 +131,10 @@ export async function deleteProduct(id: string) {
 export async function deleteGalleryImage(id: string) {
   try {
     await dbConnect();
+    const image = await GalleryImage.findById(id);
+    if (image) {
+      await deleteFromS3(image.url);
+    }
     await GalleryImage.findByIdAndDelete(id);
     revalidatePath("/gallery");
     revalidatePath("/");
@@ -131,5 +142,22 @@ export async function deleteGalleryImage(id: string) {
   } catch (error) {
     console.error("Delete gallery image error:", error);
     return { success: false, error: "Failed to delete image" };
+  }
+}
+
+export async function deleteMultipleGalleryImages(ids: string[]) {
+  try {
+    await dbConnect();
+    const images = await GalleryImage.find({ _id: { $in: ids } });
+    for (const image of images) {
+      await deleteFromS3(image.url);
+    }
+    await GalleryImage.deleteMany({ _id: { $in: ids } });
+    revalidatePath("/gallery");
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    console.error("Delete multiple gallery images error:", error);
+    return { success: false, error: "Failed to delete images" };
   }
 }

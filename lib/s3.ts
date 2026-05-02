@@ -1,5 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import sharp from "sharp";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 export const s3Client = new S3Client({
   region: process.env.S3_REGION || "us-east-1",
@@ -12,50 +11,39 @@ export const s3Client = new S3Client({
 
 export async function processAndUpload(file: File) {
   const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}.webp`;
+  const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
   const key = `uploads/${filename}`;
 
-  // Advanced Anti-Blur & High-Definition Pipeline
-  const optimizedBuffer = await sharp(buffer)
-    // 1. Resizing with Lanczos3 kernel for maximum sharpness
-    .resize(1200, null, { 
-      withoutEnlargement: true,
-      kernel: sharp.kernel.lanczos3 
-    })
-    
-    // 2. REDUCE BLUR: The Sharpening Filter
-    .sharpen({
-      sigma: 1.2, // Increases edge definition
-      m1: 1.0,    // Sharpening strength
-      m2: 2.0     // Prevents sharpening artifacts on edges
-    })
-
-    // 3. ENHANCE CLARITY: CLAHE
-    // Boosts local contrast to make details pop
-    .clahe({
-      width: 3, 
-      height: 3
-    })
-
-    // 4. COLOR NORMALIZATION
-    .normalize()
-
-    // 5. Final Output to WebP
-    .webp({ 
-      quality: 85,  // High quality to preserve new crispness
-      effort: 6,
-      smartSubsample: true // Prevents color bleeding on sharp edges
-    })
-    .toBuffer();
-
-  // Upload to S3
+  // Upload original file directly without any processing
   await s3Client.send(new PutObjectCommand({
     Bucket: process.env.S3_BUCKET,
     Key: key,
-    Body: optimizedBuffer,
-    ContentType: "image/webp",
+    Body: buffer,
+    ContentType: file.type, // Use original file type
   }));
 
   // Return the Proxy URL
   return `${process.env.NEXT_PUBLIC_BASE_URL}/api/images/${key}`;
+}
+
+export async function deleteFromS3(url: string) {
+  try {
+    // Extract key from proxy URL: .../api/images/uploads/filename
+    const key = url.split("/api/images/")[1];
+    
+    if (!key) {
+      console.warn("Could not extract S3 key from URL:", url);
+      return;
+    }
+
+    await s3Client.send(new DeleteObjectCommand({
+      Bucket: process.env.S3_BUCKET,
+      Key: key,
+    }));
+    
+    console.log("Successfully deleted from S3:", key);
+  } catch (error) {
+    console.error("S3 deletion error:", error);
+    // We don't throw here to avoid blocking the DB deletion if S3 fails
+  }
 }

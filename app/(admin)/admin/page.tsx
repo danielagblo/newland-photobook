@@ -1,7 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { uploadGalleryImage, getInquiries, getProducts, saveProduct, deleteProduct, getGalleryImages, deleteGalleryImage } from "./actions";
+import { 
+  uploadGalleryImage, 
+  getInquiries, 
+  getProducts, 
+  saveProduct, 
+  deleteProduct, 
+  getGalleryImages, 
+  deleteGalleryImage,
+  deleteMultipleGalleryImages 
+} from "./actions";
 import Image from "next/image";
 
 export default function AdminPage() {
@@ -13,6 +22,7 @@ export default function AdminPage() {
   const [galleryImages, setGalleryImages] = useState<any[]>([]);
   const [isLoadingGallery, setIsLoadingGallery] = useState(false);
   const [previews, setPreviews] = useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   
   // Inquiries State
   const [inquiries, setInquiries] = useState<any[]>([]);
@@ -33,7 +43,10 @@ export default function AdminPage() {
   const fetchGallery = async () => {
     setIsLoadingGallery(true);
     const result = await getGalleryImages();
-    if (result.success) setGalleryImages(result.images);
+    if (result.success) {
+      setGalleryImages(result.images);
+      setSelectedImages([]);
+    }
     setIsLoadingGallery(false);
   };
 
@@ -78,10 +91,31 @@ export default function AdminPage() {
     setIsUploading(false);
   }
 
-  async function handleDeleteGallery(id: string) {
-    if (confirm("Remove this image from the archival gallery?")) {
-      const result = await deleteGalleryImage(id);
-      if (result.success) fetchGallery();
+  const toggleImageSelection = (id: string) => {
+    setSelectedImages(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
+  const selectAllImages = () => {
+    if (selectedImages.length === galleryImages.length) {
+      setSelectedImages([]);
+    } else {
+      setSelectedImages(galleryImages.map(img => img._id));
+    }
+  };
+
+  async function handleDeleteSelected() {
+    if (confirm(`Permanently remove ${selectedImages.length} images from the archival gallery?`)) {
+      setIsLoadingGallery(true);
+      const result = await deleteMultipleGalleryImages(selectedImages);
+      if (result.success) {
+        setMessage({ type: 'success', text: `Successfully removed ${selectedImages.length} images.` });
+        fetchGallery();
+      } else {
+        setMessage({ type: 'error', text: "Failed to delete selected images." });
+      }
+      setIsLoadingGallery(false);
     }
   }
 
@@ -197,11 +231,32 @@ export default function AdminPage() {
                 </div>
               </form>
 
-              {/* Gallery List */}
+              {/* Gallery List Management */}
               <div className="space-y-8">
-                <div className="flex items-center gap-4">
-                  <span className="text-(--accent-primary) text-[10px] font-bold uppercase tracking-[0.4em]">Archived Works</span>
-                  <div className="h-[1px] flex-grow bg-(--border)" />
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="flex items-center gap-4 flex-grow">
+                    <span className="text-(--accent-primary) text-[10px] font-bold uppercase tracking-[0.4em]">Archived Works ({galleryImages.length})</span>
+                    <div className="h-[1px] flex-grow bg-(--border)" />
+                  </div>
+                  
+                  {galleryImages.length > 0 && (
+                    <div className="flex items-center gap-4">
+                      <button 
+                        onClick={selectAllImages}
+                        className="text-[10px] font-bold uppercase tracking-widest text-(--zinc-muted) hover:text-(--accent-primary) transition-colors"
+                      >
+                        {selectedImages.length === galleryImages.length ? "Deselect All" : "Select All"}
+                      </button>
+                      {selectedImages.length > 0 && (
+                        <button 
+                          onClick={handleDeleteSelected}
+                          className="px-6 py-2 bg-red-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-red-600 transition-all shadow-lg shadow-red-500/20"
+                        >
+                          Delete Selected ({selectedImages.length})
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 {isLoadingGallery ? (
@@ -209,13 +264,28 @@ export default function AdminPage() {
                 ) : galleryImages.length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     {galleryImages.map((img) => (
-                      <div key={img._id} className="group relative aspect-square rounded-2xl overflow-hidden border border-(--border) premium-card-shadow">
+                      <div 
+                        key={img._id} 
+                        onClick={() => toggleImageSelection(img._id)}
+                        className={`group relative aspect-square rounded-2xl overflow-hidden border cursor-pointer transition-all ${
+                          selectedImages.includes(img._id) ? "border-(--accent-primary) ring-2 ring-(--accent-primary) scale-95" : "border-(--border) hover:border-(--accent-primary)/50"
+                        }`}
+                      >
                         <img src={img.url} alt="Gallery" className="object-cover w-full h-full" />
-                        <div className="absolute inset-0 bg-(--background)/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <button onClick={() => handleDeleteGallery(img._id)} className="p-4 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500 hover:text-white transition-all">
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                          </button>
+                        
+                        {/* Selection Overlay */}
+                        <div className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                          selectedImages.includes(img._id) ? "bg-(--accent-primary) border-(--accent-primary)" : "bg-black/20 border-white/50 group-hover:border-white"
+                        }`}>
+                          {selectedImages.includes(img._id) && (
+                            <svg className="w-4 h-4 text-(--background)" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                          )}
                         </div>
+
+                        {/* Hover Overlay */}
+                        {!selectedImages.includes(img._id) && (
+                          <div className="absolute inset-0 bg-(--background)/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        )}
                       </div>
                     ))}
                   </div>
