@@ -36,7 +36,7 @@ export default async function GalleryPage() {
                   <img
                     src={img.src}
                     alt={img.title || "Archival Work"}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               ))}
