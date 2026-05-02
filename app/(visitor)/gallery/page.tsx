@@ -34,11 +34,11 @@ export default async function GalleryPage() {
           {images.length > 0 ? (
             <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
               {images.map((img: { src: string; title: string }, i: number) => (
-                <div key={i} className="break-inside-avoid group cursor-pointer overflow-hidden rounded-xl premium-card-shadow transition-all duration-500 hover:scale-[1.02] mb-4">
+                <div key={i} className="break-inside-avoid group cursor-pointer mb-4">
                   <img
                     src={img.src}
                     alt={img.title || "Archival Work"}
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain transition-opacity duration-1000 hover:opacity-80"
                   />
                 </div>
               ))}

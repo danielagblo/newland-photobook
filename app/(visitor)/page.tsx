@@ -255,13 +255,12 @@ export default function Home() {
 
           <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
             {galleryImages.length > 0 ? galleryImages.slice(0, 6).map((img, i) => (
-              <div key={i} className="break-inside-avoid group relative overflow-hidden rounded-4xl border border-(--border) premium-card-shadow transition-all duration-700 hover:-translate-y-4 mb-8">
+              <div key={i} className="break-inside-avoid group relative mb-8">
                 <img
                   src={img.src}
                   alt={img.title || "Archival Work"}
-                  className="w-full h-auto object-contain transition-transform duration-2000 group-hover:scale-105"
+                  className="w-full h-auto object-contain transition-opacity duration-1000 group-hover:opacity-80"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-(--background)/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             )) : (
               <div className="col-span-full py-20 text-center bg-(--card-bg) rounded-[3rem] border border-(--border)">
