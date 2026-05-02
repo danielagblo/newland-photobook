@@ -16,7 +16,7 @@ function ContactSlideshow() {
   useEffect(() => {
     async function fetchGallery() {
       const result = await getGalleryImages();
-      if (result.success && result.images.length > 0) {
+      if (result.success && result.images && result.images.length > 0) {
         setImages(result.images.map((img: any) => img.url));
       }
     }
@@ -35,14 +35,13 @@ function ContactSlideshow() {
       {images.map((img, i) => (
         <div
           key={i}
-          className={`absolute inset-0 transition-opacity duration-[1500ms] ${i === current ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 transition-opacity duration-1500 ${i === current ? "opacity-100" : "opacity-0"
             }`}
         >
-          <Image
+          <img
             src={img}
             alt="Archival Work"
-            fill
-            className={`object-cover ${i === current ? "animate-image-reveal" : ""}`}
+            className={`w-full h-full object-cover ${i === current ? "animate-image-reveal" : ""}`}
           />
         </div>
       ))}
@@ -72,7 +71,7 @@ export default function Home() {
 
   const fetchGallery = async () => {
     const result = await getGalleryImages();
-    if (result.success) {
+    if (result.success && result.images) {
       setGalleryImages(result.images.map((img: any) => ({
         src: img.url,
         title: img.title || "Visual Archive"
@@ -114,10 +113,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-(--background) text-(--foreground) selection:bg-(--accent-primary) selection:text-white">
 
-      {/* Hero Section - Viewport Optimized Full Height */}
+      {/* Hero Section */}
       <section className="relative h-screen min-h-[550px] flex items-center pt-12 md:pt-24 lg:pt-32 overflow-hidden bg-(--background)">
-        {/* Animated Background Blobs */}
-        <div className="absolute top-[-20%] right-[-10%] w-[100%] lg:w-[70%] h-[90%] bg-(--accent-primary)/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
+        <div className="absolute top-[-20%] right-[-10%] w-full lg:w-[70%] h-[90%] bg-(--accent-primary)/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
         <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-(--accent-secondary)/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
 
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -148,23 +146,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Layered Composition Hero Image */}
+          {/* Hero Images Grid */}
           <div className="lg:col-span-6 relative h-[350px] lg:h-[450px] flex items-center justify-center">
             <div className={`relative w-[80%] h-[85%] rounded-2xl overflow-hidden premium-card-shadow z-20 transition-all duration-1500 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-              <Image
+              <img
                 src={galleryImages[0]?.src || "/images/hero-printer.png"}
                 alt="Studio High-End"
-                fill
-                priority
-                className="object-cover"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-(--accent-primary)/10 to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 bg-linear-to-tr from-(--accent-primary)/10 to-transparent mix-blend-overlay" />
             </div>
             <div className={`absolute top-2 -right-2 w-[40%] h-[35%] rounded-xl overflow-hidden premium-card-shadow z-30 animate-float transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-              <Image src={galleryImages[1]?.src || "/images/service-photobook.png"} alt="Detail" fill className="object-cover" />
+              <img src={galleryImages[1]?.src || "/images/service-photobook.png"} alt="Detail" className="w-full h-full object-cover" />
             </div>
             <div className={`absolute -bottom-2 -left-2 w-[35%] h-[30%] rounded-xl overflow-hidden premium-card-shadow z-30 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <Image src={galleryImages[2]?.src || "/images/hero-editorial.png"} alt="Detail" fill className="object-cover" />
+              <img src={galleryImages[2]?.src || "/images/hero-editorial.png"} alt="Detail" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -188,11 +184,10 @@ export default function Home() {
             ].map((service, i) => (
               <div key={i} className="group cursor-pointer bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow hover:-translate-y-4 transition-all duration-700">
                 <div className="relative aspect-square overflow-hidden rounded-2xl mb-8">
-                  <Image
+                  <img
                     src={service.img}
                     alt={service.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                   />
                 </div>
                 <div className="px-4 pb-4 space-y-3">
@@ -214,19 +209,19 @@ export default function Home() {
           <div className="lg:col-span-6 relative order-2 lg:order-1">
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden premium-card-shadow mt-12">
-                  <Image src={galleryImages[3]?.src || "/images/hero-editorial.png"} alt="Studio" fill className="object-cover" />
+                <div className="relative aspect-4/5 rounded-2xl overflow-hidden premium-card-shadow mt-12">
+                  <img src={galleryImages[3]?.src || "/images/hero-editorial.png"} alt="Studio" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src={galleryImages[4]?.src || "/images/service-photobook.png"} alt="Studio" fill className="object-cover" />
+                  <img src={galleryImages[4]?.src || "/images/service-photobook.png"} alt="Studio" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="space-y-6">
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src={galleryImages[5]?.src || "/images/hero-printer.png"} alt="Studio" fill className="object-cover" />
+                  <img src={galleryImages[5]?.src || "/images/hero-printer.png"} alt="Studio" className="w-full h-full object-cover" />
                 </div>
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden premium-card-shadow">
-                  <Image src={galleryImages[6]?.src || "/images/service-framing.png"} alt="Studio" fill className="object-cover" />
+                <div className="relative aspect-4/5 rounded-2xl overflow-hidden premium-card-shadow">
+                  <img src={galleryImages[6]?.src || "/images/service-framing.png"} alt="Studio" className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
@@ -271,17 +266,13 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {galleryImages.length > 0 ? galleryImages.slice(0, 6).map((img, i) => (
-              <div key={i} className="group relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-(--border) premium-card-shadow transition-all duration-700 hover:-translate-y-4">
+              <div key={i} className="group relative aspect-4/5 overflow-hidden rounded-4xl border border-(--border) premium-card-shadow transition-all duration-700 hover:-translate-y-4">
                 <img
                   src={img.src}
-                  alt={img.title}
-                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-[2000ms]"
+                  alt={img.title || "Archival Work"}
+                  className="w-full h-full object-cover group-hover:scale-110 duration-2000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-(--background) via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-8 left-8 right-8 space-y-2 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                  <span className="text-[9px] font-bold tracking-[0.4em] text-(--accent-primary)">#0{i + 1}</span>
-                  <h4 className="text-xl font-display text-white">{img.title}</h4>
-                </div>
+                <div className="absolute inset-0 bg-linear-to-t from-(--background) via-transparent to-transparent opacity-80" />
               </div>
             )) : (
               <div className="col-span-full py-20 text-center bg-(--card-bg) rounded-[3rem] border border-(--border)">
@@ -296,12 +287,12 @@ export default function Home() {
       <section className="relative py-20 lg:py-40 px-6 lg:px-12">
         <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
-          <div className="bg-(--card-bg) rounded-[2rem] lg:rounded-[3rem] border border-(--border) premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
+          <div className="bg-(--card-bg) rounded-4xl lg:rounded-[3rem] border border-(--border) premium-card-shadow overflow-hidden flex flex-col lg:flex-row">
             <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-[500px]">
               <ContactSlideshow />
               <div className="absolute inset-0 bg-(--accent-primary)/10" />
               <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
-                <div className="glass-vibrant p-8 lg:p-12 rounded-[1.5rem] lg:rounded-[2rem] text-center space-y-6 max-w-md">
+                <div className="glass-vibrant p-8 lg:p-12 rounded-3xl lg:rounded-4xl text-center space-y-6 max-w-md">
                   <h2 className="text-3xl lg:text-4xl font-display text-(--foreground)">Start Your <br />Project.</h2>
                   <div className="w-12 h-1 bg-(--accent-primary) mx-auto rounded-full" />
                   <p className="text-(--zinc-muted) font-light">Collaborate with our archival specialists to bring your vision to life.</p>

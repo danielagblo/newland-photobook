@@ -22,8 +22,8 @@ export async function processAndUpload(file: File) {
     ContentType: file.type, // Use original file type
   }));
 
-  // Return the Proxy URL
-  return `${process.env.NEXT_PUBLIC_BASE_URL}/api/images/${key}`;
+  // Return a relative URL for better portability across dev/prod
+  return `/api/images/${key}`;
 }
 
 export async function deleteFromS3(url: string) {

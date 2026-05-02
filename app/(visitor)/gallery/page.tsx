@@ -17,7 +17,7 @@ export default async function GalleryPage() {
 
       <main className="pt-24 md:pt-32 px-6 md:px-12">
         <div className="container mx-auto max-w-7xl space-y-8 md:space-y-12">
-          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-10 lg:gap-12 text-center lg:text-left">
+          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-10 lg:gap-12 text-center lg:text-left mb-12">
             <div className="space-y-3">
               <span className="text-(--accent-primary) text-[11px] font-bold uppercase tracking-[0.8em]">Gallery</span>
               <h1 className="text-3xl md:text-6xl font-display tracking-tighter leading-tight">
@@ -30,27 +30,14 @@ export default async function GalleryPage() {
           </div>
 
           {images.length > 0 ? (
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
               {images.map((img: { src: string; title: string }, i: number) => (
-                <div key={i} className="break-inside-avoid group cursor-pointer space-y-6 bg-(--card-bg) p-4 rounded-3xl border border-(--border) premium-card-shadow transition-all duration-500 hover:-translate-y-2 mb-8">
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={img.src}
-                      alt={img.title}
-                      className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                  </div>
-                  <div className="flex justify-between items-center px-2 pb-2">
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold tracking-[0.4em] text-(--zinc-muted)">#0{i + 1}</span>
-                      <h3 className="text-xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors duration-300">{img.title || "Visual Archive"}</h3>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-(--background) flex items-center justify-center group-hover:bg-(--accent-primary) group-hover:text-(--background) transition-all">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
-                  </div>
+                <div key={i} className="break-inside-avoid group cursor-pointer overflow-hidden rounded-xl premium-card-shadow transition-all duration-500 hover:scale-[1.02] mb-4">
+                  <img
+                    src={img.src}
+                    alt={img.title || "Archival Work"}
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
               ))}
             </div>

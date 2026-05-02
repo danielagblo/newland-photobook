@@ -34,7 +34,15 @@ export async function getGalleryImages() {
   try {
     await dbConnect();
     const images = await GalleryImage.find({}).sort({ createdAt: -1 });
-    return { success: true, images: JSON.parse(JSON.stringify(images)) };
+    // Clean up URLs to ensure they are relative (fixes localhost issues from dev)
+    const cleanedImages = images.map(img => {
+      const obj = JSON.parse(JSON.stringify(img));
+      if (obj.url && obj.url.includes('/api/images/')) {
+        obj.url = '/api/images/' + obj.url.split('/api/images/')[1];
+      }
+      return obj;
+    });
+    return { success: true, images: cleanedImages };
   } catch (error) {
     console.error("Get gallery images error:", error);
     return { success: false, error: "Failed to fetch images" };
@@ -56,7 +64,20 @@ export async function getProducts() {
   try {
     await dbConnect();
     const products = await Product.find().sort({ createdAt: -1 });
-    return { success: true, products: JSON.parse(JSON.stringify(products)) };
+    // Clean up URLs to ensure they are relative
+    const cleanedProducts = products.map(p => {
+      const obj = JSON.parse(JSON.stringify(p));
+      if (obj.images) {
+        obj.images = obj.images.map((url: string) => {
+          if (url.includes('/api/images/')) {
+            return '/api/images/' + url.split('/api/images/')[1];
+          }
+          return url;
+        });
+      }
+      return obj;
+    });
+    return { success: true, products: cleanedProducts };
   } catch (error) {
     console.error("Get products error:", error);
     return { success: false, error: "Failed to fetch products" };
