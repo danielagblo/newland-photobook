@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { uploadGalleryImage, getInquiries, getProducts, saveProduct, deleteProduct } from "./actions";
+import { uploadGalleryImage, getInquiries, getProducts, saveProduct, deleteProduct, getGalleryImages, deleteGalleryImage } from "./actions";
 import Image from "next/image";
 
 export default function AdminPage() {
@@ -10,6 +10,8 @@ export default function AdminPage() {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   
   // Gallery State
+  const [galleryImages, setGalleryImages] = useState<any[]>([]);
+  const [isLoadingGallery, setIsLoadingGallery] = useState(false);
   const [previews, setPreviews] = useState<string[]>([]);
   
   // Inquiries State
@@ -23,9 +25,17 @@ export default function AdminPage() {
   const [productPreviews, setProductPreviews] = useState<string[]>([]);
 
   useEffect(() => {
+    if (activeTab === 'gallery') fetchGallery();
     if (activeTab === 'inquiries') fetchInquiries();
     if (activeTab === 'products') fetchProducts();
   }, [activeTab]);
+
+  const fetchGallery = async () => {
+    setIsLoadingGallery(true);
+    const result = await getGalleryImages();
+    if (result.success) setGalleryImages(result.images);
+    setIsLoadingGallery(false);
+  };
 
   const fetchInquiries = async () => {
     setIsLoadingInquiries(true);
@@ -60,11 +70,19 @@ export default function AdminPage() {
     if (result.success) {
       setMessage({ type: 'success', text: `Archived ${result.urls?.length} new visual works.` });
       setPreviews([]);
+      fetchGallery();
       (document.getElementById('gallery-form') as HTMLFormElement).reset();
     } else {
       setMessage({ type: 'error', text: result.error || "Laboratory error." });
     }
     setIsUploading(false);
+  }
+
+  async function handleDeleteGallery(id: string) {
+    if (confirm("Remove this image from the archival gallery?")) {
+      const result = await deleteGalleryImage(id);
+      if (result.success) fetchGallery();
+    }
   }
 
   async function handleProductSubmit(formData: FormData) {
@@ -134,7 +152,7 @@ export default function AdminPage() {
           )}
 
           {activeTab === 'gallery' && (
-            <div className="space-y-12 animate-in fade-in duration-700">
+            <div className="space-y-16 animate-in fade-in duration-700">
               <form
                 id="gallery-form"
                 action={handleGallerySubmit}
@@ -178,6 +196,35 @@ export default function AdminPage() {
                   </button>
                 </div>
               </form>
+
+              {/* Gallery List */}
+              <div className="space-y-8">
+                <div className="flex items-center gap-4">
+                  <span className="text-(--accent-primary) text-[10px] font-bold uppercase tracking-[0.4em]">Archived Works</span>
+                  <div className="h-[1px] flex-grow bg-(--border)" />
+                </div>
+                
+                {isLoadingGallery ? (
+                  <div className="py-20 text-center"><div className="w-8 h-8 border-4 border-(--accent-primary)/20 border-t-(--accent-primary) rounded-full animate-spin mx-auto"></div></div>
+                ) : galleryImages.length > 0 ? (
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    {galleryImages.map((img) => (
+                      <div key={img._id} className="group relative aspect-square rounded-2xl overflow-hidden border border-(--border) premium-card-shadow">
+                        <img src={img.url} alt="Gallery" className="object-cover w-full h-full" />
+                        <div className="absolute inset-0 bg-(--background)/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <button onClick={() => handleDeleteGallery(img._id)} className="p-4 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500 hover:text-white transition-all">
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="py-20 bg-(--card-bg) rounded-[2.5rem] border border-(--border) text-center text-(--zinc-muted) font-light">
+                    No visual works archived yet.
+                  </div>
+                )}
+              </div>
             </div>
           )}
 

@@ -120,3 +120,16 @@ export async function deleteProduct(id: string) {
     return { success: false, error: "Failed to delete product" };
   }
 }
+
+export async function deleteGalleryImage(id: string) {
+  try {
+    await dbConnect();
+    await GalleryImage.findByIdAndDelete(id);
+    revalidatePath("/gallery");
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    console.error("Delete gallery image error:", error);
+    return { success: false, error: "Failed to delete image" };
+  }
+}
