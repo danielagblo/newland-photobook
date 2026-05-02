@@ -1,27 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getGalleryImages } from "@/app/(admin)/admin/actions";
 
 function ContactSlideshow() {
-  const [images, setImages] = useState<string[]>([
+  const images = [
     "/images/hero-printer.png",
     "/images/service-photobook.png",
     "/images/hero-editorial.png"
-  ]);
+  ];
   const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    async function fetchGallery() {
-      const result = await getGalleryImages();
-      if (result.success && result.images && result.images.length > 0) {
-        setImages(result.images.map((img: any) => img.url));
-      }
-    }
-    fetchGallery();
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,21 +135,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Images Grid */}
+          {/* Hero Images Grid - Using Static Assets */}
           <div className="lg:col-span-6 relative h-[350px] lg:h-[450px] flex items-center justify-center">
             <div className={`relative w-[80%] h-[85%] rounded-2xl overflow-hidden premium-card-shadow z-20 transition-all duration-1500 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <img
-                src={galleryImages[0]?.src || "/images/hero-printer.png"}
+                src="/images/hero-printer.png"
                 alt="Studio High-End"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-tr from-(--accent-primary)/10 to-transparent mix-blend-overlay" />
             </div>
             <div className={`absolute top-2 -right-2 w-[40%] h-[35%] rounded-xl overflow-hidden premium-card-shadow z-30 animate-float transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-              <img src={galleryImages[1]?.src || "/images/service-photobook.png"} alt="Detail" className="w-full h-full object-cover" />
+              <img src="/images/service-photobook.png" alt="Detail" className="w-full h-full object-cover" />
             </div>
             <div className={`absolute -bottom-2 -left-2 w-[35%] h-[30%] rounded-xl overflow-hidden premium-card-shadow z-30 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <img src={galleryImages[2]?.src || "/images/hero-editorial.png"} alt="Detail" className="w-full h-full object-cover" />
+              <img src="/images/hero-editorial.png" alt="Detail" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -202,7 +191,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Legacy Section */}
+      {/* Legacy Section - Using Static Assets */}
       <section className="relative py-20 lg:py-32 px-6 lg:px-12">
         <div id="legacy" className="absolute top-24" />
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
@@ -210,18 +199,18 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
                 <div className="relative aspect-4/5 rounded-2xl overflow-hidden premium-card-shadow mt-12">
-                  <img src={galleryImages[3]?.src || "/images/hero-editorial.png"} alt="Studio" className="w-full h-full object-cover" />
+                  <img src="/images/hero-editorial.png" alt="Studio" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <img src={galleryImages[4]?.src || "/images/service-photobook.png"} alt="Studio" className="w-full h-full object-cover" />
+                  <img src="/images/service-photobook.png" alt="Studio" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="space-y-6">
                 <div className="relative aspect-square rounded-2xl overflow-hidden premium-card-shadow">
-                  <img src={galleryImages[5]?.src || "/images/hero-printer.png"} alt="Studio" className="w-full h-full object-cover" />
+                  <img src="/images/hero-printer.png" alt="Studio" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative aspect-4/5 rounded-2xl overflow-hidden premium-card-shadow">
-                  <img src={galleryImages[6]?.src || "/images/service-framing.png"} alt="Studio" className="w-full h-full object-cover" />
+                  <img src="/images/service-framing.png" alt="Studio" className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
@@ -250,7 +239,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Highlight */}
+      {/* Gallery Highlight - REMAINING DYNAMIC */}
       <section className="py-20 lg:py-32 px-6 lg:px-12 overflow-hidden">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 lg:mb-20 gap-10">
@@ -283,7 +272,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section - Using Static Assets for Slideshow */}
       <section className="relative py-20 lg:py-40 px-6 lg:px-12">
         <div id="contact" className="absolute top-24" />
         <div className="container mx-auto max-w-7xl">
