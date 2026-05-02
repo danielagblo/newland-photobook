@@ -26,7 +26,7 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     setIsLoading(true);
     const result = await getProducts();
-    if (result.success) {
+    if (result.success && result.products) {
       setProducts(result.products);
     }
     setIsLoading(false);

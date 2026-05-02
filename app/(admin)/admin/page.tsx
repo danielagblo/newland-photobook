@@ -43,7 +43,7 @@ export default function AdminPage() {
   const fetchGallery = async () => {
     setIsLoadingGallery(true);
     const result = await getGalleryImages();
-    if (result.success) {
+    if (result.success && result.images) {
       setGalleryImages(result.images);
       setSelectedImages([]);
     }
@@ -53,14 +53,14 @@ export default function AdminPage() {
   const fetchInquiries = async () => {
     setIsLoadingInquiries(true);
     const result = await getInquiries();
-    if (result.success) setInquiries(result.inquiries);
+    if (result.success && result.inquiries) setInquiries(result.inquiries);
     setIsLoadingInquiries(false);
   };
 
   const fetchProducts = async () => {
     setIsLoadingProducts(true);
     const result = await getProducts();
-    if (result.success) setProducts(result.products);
+    if (result.success && result.products) setProducts(result.products);
     setIsLoadingProducts(false);
   };
 
