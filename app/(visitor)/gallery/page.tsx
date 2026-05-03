@@ -17,7 +17,7 @@ export default async function GalleryPage() {
   return (
     <div className="min-h-screen bg-(--background) text-(--foreground) pb-32">
 
-      <main className="pt-24 md:pt-32 px-6 md:px-12">
+      <main className="pt-32 md:pt-40 px-6 md:px-12">
         <div className="container mx-auto max-w-7xl space-y-8 md:space-y-12">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-10 lg:gap-12 text-center lg:text-left mb-12">
             <div className="space-y-3">

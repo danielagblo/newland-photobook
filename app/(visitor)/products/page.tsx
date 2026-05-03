@@ -71,7 +71,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-(--background) text-(--foreground) pt-24 pb-20">
+    <div className="min-h-screen bg-(--background) text-(--foreground) pt-32 md:pt-40 pb-20">
       <div className="container mx-auto px-6 max-w-7xl">
         <header className="mb-10 space-y-3">
           <div className="flex items-center gap-4">

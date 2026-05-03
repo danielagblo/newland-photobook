@@ -103,7 +103,7 @@ export default function Home() {
     <div className="min-h-screen bg-studio-bg text-studio-text selection:bg-accent-primary selection:text-white">
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[550px] flex items-center pt-12 md:pt-24 lg:pt-32 overflow-hidden bg-studio-bg">
+      <section className="relative h-screen min-h-[550px] flex items-center pt-32 md:pt-32 lg:pt-32 overflow-hidden bg-studio-bg">
         <div className="absolute top-[-20%] right-[-10%] w-full lg:w-[70%] h-[90%] bg-accent-primary/10 rounded-full blur-[100px] lg:blur-[140px] animate-pulse-slow" />
         <div className="absolute bottom-[-15%] left-[-10%] w-[80%] lg:w-[50%] h-[70%] bg-accent-secondary/10 rounded-full blur-[100px] lg:blur-[120px] animate-pulse-slow" />
 

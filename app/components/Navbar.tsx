@@ -8,7 +8,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-7xl glass-vibrant py-3 md:py-4 px-6 md:px-10 flex justify-between items-center rounded-full border border-accent-primary/20 premium-card-shadow">
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-7xl glass-vibrant py-3 md:py-4 px-6 md:px-10 flex justify-between items-center rounded-full border border-accent-primary/20 premium-card-shadow">
         <Link href="/" className="flex items-center gap-2 md:gap-4 group cursor-pointer">
           <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-accent-primary/20 shadow-sm group-hover:scale-110 transition-transform duration-500">
             <img src="/logo.png" alt="Newland" className="w-full h-full object-cover" />

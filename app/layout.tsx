@@ -19,7 +19,7 @@ const syncopate = Syncopate({
 });
 
 export const metadata: Metadata = {
-  title: "NEWLAND STUDIOS | Creative Photo & Video Studio",
+  title: "NEWLAND PHOTOBOOK | Creative Photo & Video Studio",
   description: "Capturing life’s most important moments with clarity, style, and emotion. Professional photography and video production in Accra.",
   keywords: ["photography studio accra", "video production ghana", "event coverage", "professional photoshoots", "creative studio"],
   icons: {
