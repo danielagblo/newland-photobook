@@ -10,6 +10,7 @@ export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const [isOrdered, setIsOrdered] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
   
   // Form State
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ export default function ProductsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          projectType: `Product Order: ${selectedProduct.title || "Untitled"}`,
+          projectType: selectedProduct.title ? `Product Order: ${selectedProduct.title}` : "Product Order",
           message: `Product: ${selectedProduct.title || "Untitled"}\nPrice: ${selectedProduct.price || "N/A"}\n\nClient Message:\n${formData.message}`
         })
       });
@@ -91,17 +92,20 @@ export default function ProductsPage() {
             <div className="w-12 h-12 border-4 border-(--accent-primary)/20 border-t-(--accent-primary) rounded-full animate-spin mx-auto"></div>
           </div>
         ) : products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {products.map((product) => (
               <div key={product._id} className="group relative bg-(--card-bg) rounded-3xl border border-(--border) overflow-hidden premium-card-shadow transition-all duration-700 hover:-translate-y-4">
-                <div className="relative aspect-[4/5] overflow-hidden bg-(--background)">
+                <div 
+                  className="relative aspect-4/5 overflow-hidden bg-(--background) cursor-zoom-in"
+                  onClick={() => product.images && product.images.length > 0 && setExpandedImage(product.images[0])}
+                >
                   {product.images && product.images.length > 0 ? (
                     <>
                       <Image
                         src={product.images[0]}
                         alt={product.title || "Product"}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
+                        className="object-cover group-hover:scale-110 transition-transform duration-2000"
                       />
                       {product.images.length > 1 && (
                         <div className="absolute bottom-4 right-4 glass-vibrant px-3 py-1.5 rounded-full text-[8px] font-bold uppercase tracking-widest text-(--accent-primary) z-10">
@@ -112,7 +116,7 @@ export default function ProductsPage() {
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-(--zinc-muted) uppercase tracking-widest text-[10px]">No Image Available</div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-(--background) via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-linear-to-t from-(--background) via-transparent to-transparent opacity-60" />
                   {product.price && (
                     <div className="absolute top-6 right-6">
                       <span className="glass-vibrant px-4 py-2 rounded-full text-[10px] font-bold text-(--accent-primary) tracking-widest uppercase">
@@ -122,20 +126,22 @@ export default function ProductsPage() {
                   )}
                 </div>
 
-                <div className="p-8 space-y-6">
+                <div className="p-4 md:p-8 space-y-4 md:space-y-6">
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors">
-                      {product.title || "Untitled Work"}
-                    </h3>
+                    {product.title && !['untitled product', 'untitled work', 'untitled'].includes(product.title.toLowerCase().trim()) && (
+                      <h3 className="text-lg md:text-2xl font-display text-(--foreground) group-hover:text-(--accent-primary) transition-colors line-clamp-1">
+                        {product.title}
+                      </h3>
+                    )}
                     {product.description && (
-                      <p className="text-sm text-(--zinc-muted) font-light leading-relaxed line-clamp-3">
+                      <p className="text-[10px] md:text-sm text-(--zinc-muted) font-light leading-relaxed line-clamp-2 md:line-clamp-3">
                         {product.description}
                       </p>
                     )}
                   </div>
                   <button
                     onClick={() => handleOrder(product)}
-                    className="w-full py-4 modern-gradient text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-(--accent-primary)/20"
+                    className="w-full py-3 md:py-4 modern-gradient text-white text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.4em] rounded-xl md:rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-(--accent-primary)/20"
                   >
                     ORDER INQUIRY
                   </button>
@@ -152,7 +158,7 @@ export default function ProductsPage() {
 
       {/* Order Modal Overlay */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-6 md:p-12">
           <div className="absolute inset-0 bg-(--background)/90 backdrop-blur-2xl" onClick={() => !isSubmitting && setSelectedProduct(null)} />
           
           <div className="relative w-full max-w-4xl bg-(--card-bg) rounded-[2.5rem] border border-(--border) p-8 md:p-12 premium-card-shadow animate-float flex flex-col lg:flex-row gap-12 max-h-[90vh] overflow-y-auto">
@@ -181,7 +187,9 @@ export default function ProductsPage() {
                 <div className="lg:w-1/2 space-y-8">
                   <div className="space-y-4">
                     <span className="text-(--accent-primary) text-[10px] font-bold uppercase tracking-[0.4em]">Order Request</span>
-                    <h2 className="text-3xl md:text-5xl font-display">{selectedProduct.title || "Untitled Work"}</h2>
+                    {selectedProduct.title && !['untitled product', 'untitled work', 'untitled'].includes(selectedProduct.title.toLowerCase().trim()) && (
+                      <h2 className="text-3xl md:text-5xl font-display">{selectedProduct.title}</h2>
+                    )}
                     {selectedProduct.price && <p className="text-(--accent-primary) font-bold tracking-widest uppercase text-sm">{selectedProduct.price}</p>}
                     {selectedProduct.description && <p className="text-(--zinc-muted) text-sm font-light leading-relaxed">{selectedProduct.description}</p>}
                   </div>
@@ -248,7 +256,12 @@ export default function ProductsPage() {
                 </div>
                 <div className="space-y-4">
                   <h2 className="text-3xl font-display text-green-400">Request Sent.</h2>
-                  <p className="text-(--zinc-muted) font-light">Our lab manager will contact you shortly regarding <br /><span className="text-(--accent-primary) font-bold">{selectedProduct.title || "Untitled Work"}</span>.</p>
+                  <p className="text-(--zinc-muted) font-light">
+                    Our lab manager will contact you shortly 
+                    {!['untitled product', 'untitled work', 'untitled'].includes(selectedProduct.title?.toLowerCase().trim()) && (
+                      <> regarding <br /><span className="text-(--accent-primary) font-bold">{selectedProduct.title}</span></>
+                    )}.
+                  </p>
                 </div>
               </div>
             )}
@@ -258,6 +271,29 @@ export default function ProductsPage() {
               className="absolute top-8 right-8 text-(--zinc-muted) hover:text-(--accent-primary) transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+      {/* Image Lightbox */}
+      {expandedImage && (
+        <div 
+          className="fixed inset-0 z-200 flex items-center justify-center p-4 md:p-12 bg-(--background)/95 backdrop-blur-xl animate-in fade-in duration-300"
+          onClick={() => setExpandedImage(null)}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img 
+              src={expandedImage} 
+              alt="Enlarged product" 
+              className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl animate-in zoom-in duration-500" 
+            />
+            <button 
+              className="absolute top-0 right-0 m-4 p-4 text-(--zinc-muted) hover:text-(--accent-primary) transition-colors"
+              onClick={() => setExpandedImage(null)}
+            >
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>

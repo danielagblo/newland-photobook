@@ -41,6 +41,7 @@ function ContactSlideshow() {
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [galleryImages, setGalleryImages] = useState<any[]>([]);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -164,12 +165,12 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl lg:text-7xl font-display tracking-tight leading-tight">Specialized <span className="text-zinc-muted">Services.</span></h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
-              { title: "Photoshoots", desc: "Professional portraits, fashion, and lifestyle photography in-studio or on-location.", img: "/images/service-photobook.png" },
-              { title: "Video Production", desc: "High-end commercials, interviews, and promos tailored to your brand story.", img: "/images/service-printing.png" },
-              { title: "Event Coverage", desc: "Capturing weddings, birthdays, and corporate events with cinematic precision.", img: "/images/service-framing.png" },
-              { title: "Post-Production", desc: "Expert editing and color grading to ensure every frame meets the highest standards.", img: "/images/service-canvas.png" }
+              { title: "Event Coverage", desc: "Capturing weddings, birthdays, and corporate events with cinematic precision.", img: "/images/events.jpg" },
+              { title: "Photobook", desc: "High-quality custom photobooks designed to preserve your most cherished memories forever.", img: "/images/photobook.jpg" },
+              { title: "Video Production", desc: "High-end commercials, interviews, and promos tailored to your brand story.", img: "/images/video production.jpg" },
+              { title: "Souvenirs", desc: "Customized souvenirs and gifts that turn your moments into timeless keepsakes.", img: "/images/souviners.jpg" }
             ].map((service, i) => (
               <div key={i} className="group cursor-pointer bg-card-bg p-4 rounded-3xl border border-white/10 premium-card-shadow hover:-translate-y-4 transition-all duration-700">
                 <div className="relative aspect-square overflow-hidden rounded-2xl mb-8">
@@ -179,9 +180,9 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                   />
                 </div>
-                <div className="px-4 pb-4 space-y-3">
-                  <h3 className="text-lg font-display text-studio-text group-hover:text-accent-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-sm text-zinc-muted font-light leading-relaxed">
+                <div className="px-2 md:px-4 pb-4 space-y-2 md:space-y-3">
+                  <h3 className="text-sm md:text-lg font-display text-studio-text group-hover:text-accent-primary transition-colors duration-300 line-clamp-1">{service.title}</h3>
+                  <p className="text-[10px] md:text-sm text-zinc-muted font-light leading-relaxed line-clamp-2">
                     {service.desc}
                   </p>
                 </div>
@@ -253,14 +254,19 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+          <div className="columns-2 md:columns-2 lg:columns-3 gap-8 space-y-8">
             {galleryImages.length > 0 ? galleryImages.slice(0, 6).map((img, i) => (
-              <div key={i} className="break-inside-avoid group relative mb-8">
+              <div 
+                key={i} 
+                className="break-inside-avoid group relative mb-8 cursor-zoom-in overflow-hidden rounded-xl border border-(--border)"
+                onClick={() => setSelectedGalleryImage(img.src)}
+              >
                 <img
                   src={img.src}
                   alt={img.title || "Archival Work"}
-                  className="w-full h-auto object-contain transition-opacity duration-1000 group-hover:opacity-80"
+                  className="w-full h-auto object-contain transition-all duration-1000 group-hover:scale-105 group-hover:opacity-80"
                 />
+                <div className="absolute inset-0 bg-(--accent-primary)/5 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             )) : (
               <div className="col-span-full py-20 text-center bg-(--card-bg) rounded-[3rem] border border-(--border)">
@@ -339,7 +345,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--zinc-muted)">Project Type</label>
                   <div className="grid grid-cols-2 gap-4">
-                    {['Photobook', 'Printing', 'Framing', 'Other'].map(type => (
+                    {['Event Coverage', 'Photobook', 'Video Production', 'Souvenirs'].map(type => (
                       <button
                         key={type}
                         type="button"
@@ -376,7 +382,29 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      {/* Gallery Lightbox */}
+      {selectedGalleryImage && (
+        <div 
+          className="fixed inset-0 z-200 flex items-center justify-center p-4 md:p-12 bg-(--background)/95 backdrop-blur-xl animate-in fade-in duration-300"
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img 
+              src={selectedGalleryImage} 
+              alt="Enlarged gallery work" 
+              className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl animate-in zoom-in duration-500" 
+            />
+            <button 
+              className="absolute top-0 right-0 m-4 p-4 text-(--zinc-muted) hover:text-(--accent-primary) transition-colors"
+              onClick={() => setSelectedGalleryImage(null)}
+            >
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

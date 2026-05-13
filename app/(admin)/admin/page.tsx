@@ -33,6 +33,8 @@ export default function AdminPage() {
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
   const [productPreviews, setProductPreviews] = useState<string[]>([]);
+  const [productPage, setProductPage] = useState(1);
+  const itemsPerPage = 4;
 
   useEffect(() => {
     if (activeTab === 'gallery') fetchGallery();
@@ -358,39 +360,66 @@ export default function AdminPage() {
                 </div>
 
                 {/* List Column */}
-                <div className="lg:col-span-7 space-y-6">
+                <div className="lg:col-span-7 space-y-8">
                   {isLoadingProducts ? (
                     <div className="p-20 text-center"><div className="w-8 h-8 border-4 border-(--accent-primary)/20 border-t-(--accent-primary) rounded-full animate-spin mx-auto"></div></div>
                   ) : products.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-6">
-                      {products.map((p) => (
-                        <div key={p._id} className="bg-(--card-bg) p-6 rounded-[2rem] border border-(--border) flex gap-6 items-center group">
-                          <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-(--background)">
-                            {p.images && p.images.length > 0 ? (
-                              <Image src={p.images[0]} alt={p.title} fill className="object-cover" />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-(--zinc-muted) text-[8px] font-bold uppercase tracking-widest text-center px-2">No Image</div>
-                            )}
+                    <>
+                      <div className="grid grid-cols-1 gap-6">
+                        {products.slice((productPage - 1) * itemsPerPage, productPage * itemsPerPage).map((p) => (
+                          <div key={p._id} className="bg-(--card-bg) p-6 rounded-[2rem] border border-(--border) flex gap-6 items-center group">
+                            <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-(--background)">
+                              {p.images && p.images.length > 0 ? (
+                                <Image src={p.images[0]} alt={p.title} fill className="object-cover" />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-(--zinc-muted) text-[8px] font-bold uppercase tracking-widest text-center px-2">No Image</div>
+                              )}
+                            </div>
+                            <div className="flex-grow">
+                              <h4 className="text-lg font-display text-(--foreground)">{p.title || "No Title"}</h4>
+                              {p.price && <p className="text-[10px] font-bold text-(--accent-primary) uppercase tracking-widest mb-1">{p.price}</p>}
+                              {p.description && <p className="text-xs text-(--zinc-muted) font-light line-clamp-2">{p.description}</p>}
+                              {p.images && p.images.length > 1 && (
+                                <p className="text-[8px] font-bold text-(--accent-primary) uppercase tracking-tighter mt-1">+{p.images.length - 1} More Images</p>
+                              )}
+                            </div>
+                            <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <button onClick={() => { setEditingProduct(p); setProductPreviews([]); }} className="p-3 bg-(--background) rounded-full hover:text-(--accent-primary) transition-colors shadow-sm border border-(--border)">
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                              </button>
+                              <button onClick={() => handleDeleteProduct(p._id)} className="p-3 bg-(--background) rounded-full hover:text-red-400 transition-colors shadow-sm border border-(--border)">
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                              </button>
+                            </div>
                           </div>
-                          <div className="flex-grow">
-                            <h4 className="text-lg font-display text-(--foreground)">{p.title || "Untitled Product"}</h4>
-                            {p.price && <p className="text-[10px] font-bold text-(--accent-primary) uppercase tracking-widest mb-1">{p.price}</p>}
-                            {p.description && <p className="text-xs text-(--zinc-muted) font-light line-clamp-2">{p.description}</p>}
-                            {p.images && p.images.length > 1 && (
-                              <p className="text-[8px] font-bold text-(--accent-primary) uppercase tracking-tighter mt-1">+{p.images.length - 1} More Images</p>
-                            )}
+                        ))}
+                      </div>
+
+                      {/* Pagination Controls */}
+                      {products.length > itemsPerPage && (
+                        <div className="flex items-center justify-between pt-8 border-t border-(--border)">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-(--zinc-muted)">
+                            Page {productPage} of {Math.ceil(products.length / itemsPerPage)}
                           </div>
-                          <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onClick={() => { setEditingProduct(p); setProductPreviews([]); }} className="p-3 bg-(--background) rounded-full hover:text-(--accent-primary) transition-colors shadow-sm border border-(--border)">
-                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                          <div className="flex gap-4">
+                            <button
+                              disabled={productPage === 1}
+                              onClick={() => setProductPage(prev => Math.max(1, prev - 1))}
+                              className={`p-3 rounded-xl border border-(--border) transition-all ${productPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-(--accent-primary) hover:text-(--background)'}`}
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                             </button>
-                            <button onClick={() => handleDeleteProduct(p._id)} className="p-3 bg-(--background) rounded-full hover:text-red-400 transition-colors shadow-sm border border-(--border)">
-                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            <button
+                              disabled={productPage >= Math.ceil(products.length / itemsPerPage)}
+                              onClick={() => setProductPage(prev => Math.min(Math.ceil(products.length / itemsPerPage), prev + 1))}
+                              className={`p-3 rounded-xl border border-(--border) transition-all ${productPage >= Math.ceil(products.length / itemsPerPage) ? 'opacity-30 cursor-not-allowed' : 'hover:bg-(--accent-primary) hover:text-(--background)'}`}
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                             </button>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </>
                   ) : (
                     <div className="p-20 bg-(--card-bg) rounded-[2.5rem] border border-(--border) text-center text-(--zinc-muted) font-light">
                       No archival products defined.

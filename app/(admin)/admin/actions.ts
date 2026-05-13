@@ -108,7 +108,7 @@ export async function saveProduct(formData: FormData) {
     const allImages = [...currentImages, ...newImageUrls];
 
     const productData = {
-      title: title || "Untitled Product",
+      title: title || "",
       price: price || "",
       description: description || "",
       images: allImages
